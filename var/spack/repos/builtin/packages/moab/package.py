@@ -109,7 +109,8 @@ class Moab(AutotoolsPackage):
             '--disable-h5mtools',
             '--disable-mbcslam',
             '--with-pic',
-            '--without-vtk'
+            '--without-vtk',
+            '--without-cgns'
         ]
         if '+mpi' in spec:
             options.extend([
