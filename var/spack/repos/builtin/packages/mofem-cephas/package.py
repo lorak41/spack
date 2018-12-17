@@ -32,6 +32,7 @@ class MofemCephas(CMakePackage):
     maintainers = ['likask']
 
     version('develop', branch='develop')
+    version('0.8.18', tag='v0.8.18')
     version('0.8.17', tag='v0.8.17')
     version('0.8.16', tag='v0.8.16')
     version('0.8.15', tag='v0.8.15')
