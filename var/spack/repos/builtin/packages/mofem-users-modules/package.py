@@ -33,6 +33,7 @@ class MofemUsersModules(CMakePackage):
     git = "https://likask@bitbucket.org/mofem/users-modules-cephas.git"
 
     version('develop', branch='develop')
+    version('0.8.20', commit='1b43c08113a8f4c77cd25ee2f4071660a1a79695')
     version('0.8.19', commit='0e79a7be9369ec2cd63301f5ed939a1b5d5c1fdc')
     version('0.8.18', commit='860be021ca6891477166e14c56cfeeb087e967ff')
     version('0.8.17', commit='60b2341f1635f595d571096dd8c70a7cf7538aeb')

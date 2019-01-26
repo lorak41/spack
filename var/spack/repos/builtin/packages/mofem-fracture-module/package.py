@@ -32,6 +32,7 @@ class MofemFractureModule(CMakePackage):
     maintainers = ['likask']
 
     version('develop', branch='develop')
+    version('0.9.51', tag='v0.9.51')
     version('0.9.50', tag='v0.9.50')
     version('0.9.49', tag='v0.9.49')
     version('0.9.48', tag='v0.9.48')
