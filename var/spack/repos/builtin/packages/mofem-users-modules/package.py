@@ -52,6 +52,7 @@ class MofemUsersModules(CMakePackage):
         description='Copy user modules directory instead linking')
 
     extends('mofem-cephas')
+    depends_on('mofem-cephas@0.8.20', when='@0.8.20')
     depends_on('mofem-cephas@0.8.19', when='@0.8.19')
     depends_on('mofem-cephas@0.8.18', when='@0.8.18')   
     depends_on('mofem-cephas@0.8.17', when='@0.8.17')
