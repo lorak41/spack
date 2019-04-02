@@ -22,6 +22,7 @@ class Moab(AutotoolsPackage):
 
     version('develop', branch='develop')
     version('master', branch='master')
+    version('5.1.0', branch='Version5.1.0')
     # Version 5.0.2 disappeared from FTP server. Instead set temporary version
     # of MoAB to 5.0.2 set to current head of the master branch.
     version('5.0.2', commit='01d05b1805236ef44da36f67eb2701095f2e33c7')
