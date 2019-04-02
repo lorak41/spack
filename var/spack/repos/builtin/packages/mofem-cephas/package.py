@@ -63,7 +63,7 @@ class MofemCephas(CMakePackage):
     depends_on('hdf5@:1.8.19+hl+mpi')
     depends_on('petsc@:3.9.3+mumps+mpi')
     depends_on('slepc', when='+slepc')
-    depends_on('moab@:5.0.1')
+    depends_on('moab')
     # Upper bound set to ADOL-C until issues with memory leaks
     # for versions 2.6: fully resolved
     depends_on('adol-c@2.5.2~examples', when='+adol-c')
