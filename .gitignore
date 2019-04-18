@@ -25,3 +25,4 @@ lib/spack/spack/test/.cache
 /bin/spackc
 *.in.log
 *.out.log
+.vscode
