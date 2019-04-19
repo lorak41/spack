@@ -79,6 +79,7 @@ class Petsc(Package):
             multi=False)
     variant('suite-sparse', default=False,
             description='Activates support for SuiteSparse')
+    variant('xquartz', default=(sys.platform == 'darwin'), description='Add X11 support with XQuartz')
 
     # 3.8.0 has a build issue with MKL - so list this conflict explicitly
     conflicts('^intel-mkl', when='@3.8.0')
@@ -183,7 +184,6 @@ class Petsc(Package):
 
     def install(self, spec, prefix):
         options = ['--with-ssl=0',
-                   '--with-x=0',
                    '--download-c2html=0',
                    '--download-sowing=0',
                    '--download-hwloc=0',
@@ -283,6 +283,11 @@ class Petsc(Package):
             ])
         else:
             options.append('--with-zlib=0')
+
+        if '+xquartz' in spec:
+            options.append('--with-x=/opt/X11')
+        else:
+            options.append('--with-x=0')            
 
         python('configure', '--prefix=%s' % prefix, *options)
 
