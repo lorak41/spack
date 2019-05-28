@@ -10,17 +10,13 @@ from spack import *
 class Med(CMakePackage):
     """The MED file format is a specialization of the HDF5 standard."""
 
-    # homepage = "http://docs.salome-platform.org/latest/dev/MEDCoupling/med-file.html"
     homepage = "https://docs.salome-platform.org/latest/dev/MEDCoupling/user/html/index.html"
     
-    # url = "http://files.salome-platform.org/Salome/other/med-3.2.0.tar.gz"
-
     maintainers = ['likask']
 
-    # version('3.2.0', 'eb61df92f0624feb6328f517cd756a23')
     version('3.2.0', 'eb61df92f0624feb6328f517cd756a23', url='http://files.salome-platform.org/Salome/other/med-3.2.0.tar.gz')
     
-    version('3.3.1', 'c64ef88d1804a284dba6966bf853d081', url='http://files.salome-platform.org/Salome/other/med-3.3.1.tar.gz')
+    version('3.3.1', '4981a02fa50b1a487a022804512631ff', url='http://files.salome-platform.org/Salome/other/med-3.3.1.tar.gz')
 
     variant('api23', default=True, description='Enable API2.3')
 
