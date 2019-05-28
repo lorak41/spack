@@ -12,10 +12,9 @@ class Med(CMakePackage):
 
     homepage = "https://docs.salome-platform.org/latest/dev/MEDCoupling/user/html/index.html"
     
-    maintainers = ['likask']
+    maintainers = ['likask', 'hoangnguyence']
 
     version('3.2.0', 'eb61df92f0624feb6328f517cd756a23', url='http://files.salome-platform.org/Salome/other/med-3.2.0.tar.gz')
-    
     version('3.3.1', '4981a02fa50b1a487a022804512631ff', url='http://files.salome-platform.org/Salome/other/med-3.3.1.tar.gz')
 
     variant('api23', default=True, description='Enable API2.3')
