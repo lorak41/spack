@@ -1,4 +1,4 @@
-# Copyright 2013-2018 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2019 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
@@ -26,4 +26,9 @@ class Jsoncpp(CMakePackage):
     depends_on('python', type='test')
 
     def cmake_args(self):
-        return ['-DBUILD_SHARED_LIBS=ON']
+        args = ['-DBUILD_SHARED_LIBS=ON']
+        if self.run_tests:
+            args.append('-DJSONCPP_WITH_TESTS=ON')
+        else:
+            args.append('-DJSONCPP_WITH_TESTS=OFF')
+        return args

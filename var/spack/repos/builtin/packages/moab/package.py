@@ -1,4 +1,4 @@
-# Copyright 2013-2018 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2019 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
@@ -22,7 +22,6 @@ class Moab(AutotoolsPackage):
 
     version('develop', branch='develop')
     version('master', branch='master')
-    version('5.1.0', branch='Version5.1.0')
     # Version 5.0.2 disappeared from FTP server. Instead set temporary version
     # of MoAB to 5.0.2 set to current head of the master branch.
     version('5.0.2', commit='01d05b1805236ef44da36f67eb2701095f2e33c7')
@@ -102,8 +101,7 @@ class Moab(AutotoolsPackage):
             '--disable-h5mtools',
             '--disable-mbcslam',
             '--with-pic',
-            '--without-vtk',
-            '--without-cgns'
+            '--without-vtk'
         ]
         if '+mpi' in spec:
             options.extend([
