@@ -16,6 +16,7 @@ class MofemMinimalSurfaceEquation(CMakePackage):
     maintainers = ['likask']
 
     version('develop', branch='develop')
+    version('0.3.11', tag='v0.3.11')
     version('0.3.10', tag='v0.3.10')
     version('0.3.9', tag='v0.3.9')
 
