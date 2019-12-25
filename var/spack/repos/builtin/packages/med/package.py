@@ -16,11 +16,13 @@ class Med(CMakePackage):
 
     version('3.2.0', 'eb61df92f0624feb6328f517cd756a23', url='http://files.salome-platform.org/Salome/other/med-3.2.0.tar.gz')
     version('3.3.1', '4981a02fa50b1a487a022804512631ff', url='http://files.salome-platform.org/Salome/other/med-3.3.1.tar.gz')
+    version('4.0.0', 'ef903d0dc165fc72818ab264ebb6e8ba', url='http://files.salome-platform.org/Salome/other/med-4.0.0.tar.gz')
 
     variant('api23', default=True, description='Enable API2.3')
 
     depends_on('mpi')
-    depends_on('hdf5@:1.8.19+mpi')
+    depends_on('hdf5@:1.8.19+mpi', when='@:3.99.99')
+    depends_on('hdf5@:1.10.5+mpi', when='@4.0.0:') 
 
     # FIXME This is minimal installation.
 
