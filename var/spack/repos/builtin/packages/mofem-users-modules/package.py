@@ -17,6 +17,7 @@ class MofemUsersModules(CMakePackage):
     git = "https://likask@bitbucket.org/mofem/users-modules-cephas.git"
 
     version('develop', branch='develop')
+    version('lukasz', branch='lukasz/develop')
     version('0.9.0', commit='173cefb39de9699935568d5d33db4b51a8813ef6')
     version('0.8.23', commit='12d9df7fd31e95b90d245e1eee055769424e04a9')
     version('0.8.21', commit='21825107ca949bd7ec5ea7bbd523bd2fd890be7f')
@@ -54,6 +55,7 @@ class MofemUsersModules(CMakePackage):
     depends_on('mofem-cephas@0.8.10', when='@0.8.10')
     depends_on('mofem-cephas@0.8.8:0.8.9', when='@0.8.8')
     depends_on('mofem-cephas@0.8.7', when='@0.8.7')
+    depends_on('mofem-cephas@lukasz', when='@lukasz')
     depends_on('mofem-cephas@develop', when='@develop')
 
     def cmake_args(self):
