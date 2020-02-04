@@ -17,6 +17,7 @@ class MofemSoftmech(CMakePackage):
 
     version('develop', branch='develop')
     version('0.0.1', tag='v0.0.1')
+    version('0.0.2', tag='v0.0.2')
 
     variant('copy_user_modules', default=True,
         description='Copy user modules directory instead linking')
