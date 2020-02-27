@@ -37,6 +37,8 @@ class MofemUsersModules(CMakePackage):
 
     maintainers = ['likask']
 
+    variant('install_id', values=int, default=0,
+        description='Internal install Id used by Jenkins')
     variant('copy_user_modules', default=True,
         description='Copy user modules directory instead linking')
 

@@ -38,6 +38,8 @@ class MofemCephas(CMakePackage):
     version('0.8.7', tag='v0.8.7')
 
     # This option can be only used for development of core lib
+    variant('install_id', values=int, default=0,
+        description='Internal install Id used by Jenkins')
     variant('copy_user_modules', default=True,
         description='Copy user modules directory instead linking to source')
     variant('adol-c', default=True, description='Compile with ADOL-C')
