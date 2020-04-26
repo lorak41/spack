@@ -48,7 +48,7 @@ class MofemCephas(CMakePackage):
     variant('slepc', default=False, description='Compile with Slepc')
 
     depends_on('mpi')
-    depends_on('boost@:1.68')
+    depends_on('boost@:1.69')
     depends_on('parmetis')
     depends_on('petsc@:3.11.99+mumps+mpi')
     depends_on('slepc@:3.11.99', when='+slepc')
