@@ -58,6 +58,8 @@ class MofemCephas(CMakePackage):
     depends_on('adol-c@2.5.2~examples', when='+adol-c')
     depends_on('tetgen', when='+tetgen')
     depends_on('med', when='+med')
+    depends_on('med@:3.99.99', when='+med @:0.9.0')
+    depends_on('med@4.0.0:', when='+med @0.9.1:')
 
     extendable = True
 
