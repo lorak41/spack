@@ -57,9 +57,13 @@ class MofemCephas(CMakePackage):
     # for versions 2.6: fully resolved
     depends_on('adol-c@2.5.2~examples', when='+adol-c')
     depends_on('tetgen', when='+tetgen')
+
+    # MED install
     depends_on('med', when='+med')
-    depends_on('med@:3.99.99', when='+med @:0.9.0')
+    depends_on('med@:3.99.99', when='+med @0.8.7:0.9.0')
     depends_on('med@4.0.0:', when='+med @0.9.1:')
+    depends_on('med@4.0.0:', when='+med @develop')
+    depends_on('med@4.0.0:', when='+med @lukasz')
 
     extendable = True
 

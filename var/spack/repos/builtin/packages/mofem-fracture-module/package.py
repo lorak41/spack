@@ -40,6 +40,7 @@ class MofemFractureModule(CMakePackage):
     depends_on('mofem-users-modules@0.8.17:', when='@0.9.50')
     depends_on('mofem-users-modules@0.8.16', when='@0.9.49')
     depends_on('mofem-users-modules@0.8.15', when='@0.9.48')
+    depends_on('mofem-users-modules@develop', when='@develop')
     depends_on('mofem-users-modules@lukasz', when='@lukasz')
     depends_on("mofem-users-modules", type=('build', 'link', 'run'))
 
