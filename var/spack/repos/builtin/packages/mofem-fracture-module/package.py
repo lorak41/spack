@@ -1,4 +1,4 @@
-# Copyright 2013-2018 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2020 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
@@ -16,11 +16,6 @@ class MofemFractureModule(CMakePackage):
     maintainers = ['likask']
 
     version('develop', branch='develop')
-    version('lukasz', branch='lukasz/develop')
-    version('0.9.61', tag='v0.9.61-release')
-    version('0.9.60', tag='v0.9.60')
-    version('0.9.52', tag='v0.9.52')
-    version('0.9.51', tag='v0.9.51')
     version('0.9.50', tag='v0.9.50')
     version('0.9.49', tag='v0.9.49')
     version('0.9.48', tag='v0.9.48')
@@ -31,17 +26,12 @@ class MofemFractureModule(CMakePackage):
     version('0.9.42', tag='v0.9.42')
 
     variant('copy_user_modules', default=True,
-        description='Copy user modules directory instead linking')
+            description='Copy user modules directory instead linking')
 
     extends('mofem-cephas')
-    depends_on('mofem-users-modules@0.9.1:', when='@0.9.61')
-    depends_on('mofem-users-modules@0.9.0', when='@0.9.60')
-    depends_on('mofem-users-modules@0.8.21:0.8.99', when='@0.9.52')
-    depends_on('mofem-users-modules@0.8.17:', when='@0.9.50')
+    depends_on('mofem-users-modules@0.8.17', when='@0.9.50')
     depends_on('mofem-users-modules@0.8.16', when='@0.9.49')
     depends_on('mofem-users-modules@0.8.15', when='@0.9.48')
-    depends_on('mofem-users-modules@develop', when='@develop')
-    depends_on('mofem-users-modules@lukasz', when='@lukasz')
     depends_on("mofem-users-modules", type=('build', 'link', 'run'))
 
     # The CMakeLists.txt installed with mofem-cephas package set cmake
@@ -78,8 +68,7 @@ class MofemFractureModule(CMakePackage):
             ('YES' if '+copy_user_modules' in spec else 'NO')])
 
         # Set module version
-        if self.spec.version == Version('develop') or \
-          self.spec.version == Version('lukasz'):
+        if self.spec.version == Version('develop'):
             options.extend([
                 '-DFM_VERSION_MAJOR=%s' % 0,
                 '-DFM_VERSION_MINOR=%s' % 0,

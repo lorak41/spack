@@ -1,4 +1,4 @@
-.. Copyright 2013-2019 Lawrence Livermore National Security, LLC and other
+.. Copyright 2013-2020 Lawrence Livermore National Security, LLC and other
    Spack Project Developers. See the top-level COPYRIGHT file for details.
 
    SPDX-License-Identifier: (Apache-2.0 OR MIT)
@@ -58,9 +58,9 @@ directory. Here's an example of an external configuration:
    packages:
      openmpi:
        paths:
-         openmpi@1.4.3%gcc@4.4.7 arch=linux-x86_64-debian7: /opt/openmpi-1.4.3
-         openmpi@1.4.3%gcc@4.4.7 arch=linux-x86_64-debian7+debug: /opt/openmpi-1.4.3-debug
-         openmpi@1.6.5%intel@10.1 arch=linux-x86_64-debian7: /opt/openmpi-1.6.5-intel
+         openmpi@1.4.3%gcc@4.4.7 arch=linux-debian7-x86_64: /opt/openmpi-1.4.3
+         openmpi@1.4.3%gcc@4.4.7 arch=linux-debian7-x86_64+debug: /opt/openmpi-1.4.3-debug
+         openmpi@1.6.5%intel@10.1 arch=linux-debian7-x86_64: /opt/openmpi-1.6.5-intel
 
 This example lists three installations of OpenMPI, one built with GCC,
 one built with GCC and debug information, and another built with Intel.
@@ -107,9 +107,9 @@ be:
    packages:
      openmpi:
        paths:
-         openmpi@1.4.3%gcc@4.4.7 arch=linux-x86_64-debian7: /opt/openmpi-1.4.3
-         openmpi@1.4.3%gcc@4.4.7 arch=linux-x86_64-debian7+debug: /opt/openmpi-1.4.3-debug
-         openmpi@1.6.5%intel@10.1 arch=linux-x86_64-debian7: /opt/openmpi-1.6.5-intel
+         openmpi@1.4.3%gcc@4.4.7 arch=linux-debian7-x86_64: /opt/openmpi-1.4.3
+         openmpi@1.4.3%gcc@4.4.7 arch=linux-debian7-x86_64+debug: /opt/openmpi-1.4.3-debug
+         openmpi@1.6.5%intel@10.1 arch=linux-debian7-x86_64: /opt/openmpi-1.6.5-intel
        buildable: False
 
 The addition of the ``buildable`` flag tells Spack that it should never build
@@ -148,7 +148,8 @@ Here's an example ``packages.yaml`` file that sets preferred packages:
      gperftools:
        version: [2.2, 2.4, 2.3]
      all:
-       compiler: [gcc@4.4.7, gcc@4.6:, intel, clang, pgi]
+       compiler: [gcc@4.4.7, 'gcc@4.6:', intel, clang, pgi]
+       target: [sandybridge]
        providers:
          mpi: [mvapich2, mpich, openmpi]
 
@@ -162,11 +163,11 @@ on the command line if explicitly requested.
 
 Each ``packages.yaml`` file begins with the string ``packages:`` and
 package names are specified on the next level. The special string ``all``
-applies settings to each package. Underneath each package name is
-one or more components: ``compiler``, ``variants``, ``version``,
-or ``providers``.  Each component has an ordered list of spec
-``constraints``, with earlier entries in the list being preferred over
-later entries.
+applies settings to *all* packages. Underneath each package name is one
+or more components: ``compiler``, ``variants``, ``version``,
+``providers``, and ``target``.  Each component has an ordered list of
+spec ``constraints``, with earlier entries in the list being preferred
+over later entries.
 
 Sometimes a package installation may have constraints that forbid
 the first concretization rule, in which case Spack will use the first

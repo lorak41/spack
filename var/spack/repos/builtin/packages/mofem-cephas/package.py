@@ -1,4 +1,4 @@
-# Copyright 2013-2018 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2020 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
@@ -16,15 +16,6 @@ class MofemCephas(CMakePackage):
     maintainers = ['likask']
 
     version('develop', branch='develop')
-    version('lukasz', branch='lukasz/develop')
-    version('0.9.1', tag='v0.9.1-release')
-    version('0.9.0', tag='v0.9.0')
-    version('0.8.23', tag='v0.8.23')
-    version('0.8.22', tag='v0.8.22')
-    version('0.8.21', tag='v0.8.21')
-    version('0.8.20', tag='v0.8.20')
-    version('0.8.19', tag='v0.8.19')
-    version('0.8.18', tag='v0.8.18')
     version('0.8.17', tag='v0.8.17')
     version('0.8.16', tag='v0.8.16')
     version('0.8.15', tag='v0.8.15')
@@ -38,32 +29,28 @@ class MofemCephas(CMakePackage):
     version('0.8.7', tag='v0.8.7')
 
     # This option can be only used for development of core lib
-    variant('install_id', values=int, default=0,
-        description='Internal install Id used by Jenkins')
     variant('copy_user_modules', default=True,
-        description='Copy user modules directory instead linking to source')
+            description='Copy user modules directory '
+            'instead of linking to source')
     variant('adol-c', default=True, description='Compile with ADOL-C')
     variant('tetgen', default=True, description='Compile with Tetgen')
     variant('med', default=True, description='Compile with Med')
     variant('slepc', default=False, description='Compile with Slepc')
 
-    depends_on('mpi')
-    depends_on('boost@:1.69 cxxstd=14')
-    depends_on('parmetis')
-    depends_on('petsc@:3.11.99+mumps+mpi')
-    depends_on('slepc@:3.11.99', when='+slepc')
-    depends_on('moab')
+    depends_on("mpi")
+    depends_on("boost@:1.68")
+    depends_on("parmetis")
+    # Fixed version of hdf5, to remove some problems with dependent
+    # packages, f.e. MED format
+    depends_on("hdf5@:1.8.19+hl+mpi")
+    depends_on("petsc@:3.9.3+mumps+mpi")
+    depends_on('slepc', when='+slepc')
+    depends_on("moab")
     # Upper bound set to ADOL-C until issues with memory leaks
     # for versions 2.6: fully resolved
-    depends_on('adol-c@2.5.2~examples', when='+adol-c')
-    depends_on('tetgen', when='+tetgen')
-
-    # MED install
-    depends_on('med', when='+med')
-    depends_on('med@:3.99.99', when='+med @0.8.7:0.9.0')
-    depends_on('med@4.0.0:', when='+med @0.9.1:')
-    depends_on('med@4.0.0:', when='+med @develop')
-    depends_on('med@4.0.0:', when='+med @lukasz')
+    depends_on("adol-c@2.5.2~examples", when="+adol-c")
+    depends_on("tetgen", when="+tetgen")
+    depends_on("med", when='+med')
 
     extendable = True
 
