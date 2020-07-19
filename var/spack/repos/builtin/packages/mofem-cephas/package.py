@@ -49,7 +49,7 @@ class MofemCephas(CMakePackage):
     variant('mgis', default=False, description='Compile with Mgis')
 
     depends_on('mpi')
-    depends_on('boost@:1.69 cxxstd=14')
+    depends_on('boost@:1.73 cxxstd=14')
     depends_on('parmetis')
     depends_on('petsc@:3.11.99+mumps+mpi+X')
     depends_on('slepc@:3.11.99', when='+slepc')
@@ -59,7 +59,7 @@ class MofemCephas(CMakePackage):
     depends_on('adol-c@2.5.2~examples', when='+adol-c')
     depends_on('tetgen', when='+tetgen')
     depends_on('mgis', when='+mgis')
-    depends_on('boost@:1.69+python+numpy cxxstd=14', when='+mgis')
+    depends_on('boost@:1.73+python+numpy cxxstd=14', when='+mgis')
 
     # MED install
     depends_on('med', when='+med')
