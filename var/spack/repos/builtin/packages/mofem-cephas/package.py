@@ -52,7 +52,12 @@ class MofemCephas(CMakePackage):
     depends_on('parmetis')
     depends_on('petsc@:3.11.99+mumps+mpi')
     depends_on('slepc@:3.11.99', when='+slepc')
-    depends_on('moab')
+
+    # MOAB install
+    depends_on('moab@:5.1.0', when='@0.8.7:0.9.2')
+    depends_on('moab', when='@develop')
+    depends_on('moab', when='@lukasz')
+
     # Upper bound set to ADOL-C until issues with memory leaks
     # for versions 2.6: fully resolved
     depends_on('adol-c@2.5.2~examples', when='+adol-c')
