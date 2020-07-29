@@ -17,6 +17,7 @@ class MofemFractureModule(CMakePackage):
 
     version('develop', branch='develop')
     version('lukasz', branch='lukasz/develop')
+    version('0.9.62', branch='Version0.9.62')
     version('0.9.61', tag='v0.9.61-release')
     version('0.9.60', tag='v0.9.60')
     version('0.9.52', tag='v0.9.52')
