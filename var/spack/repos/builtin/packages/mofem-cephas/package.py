@@ -17,6 +17,7 @@ class MofemCephas(CMakePackage):
 
     version('develop', branch='develop')
     version('lukasz', branch='lukasz/develop')
+    version('0.10.0', branch='Version0.10.0')
     version('0.9.2', branch='Version0.9.2')
     version('0.9.1', tag='v0.9.1-release')
     version('0.9.0', tag='v0.9.0')

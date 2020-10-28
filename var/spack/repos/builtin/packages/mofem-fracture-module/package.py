@@ -17,6 +17,7 @@ class MofemFractureModule(CMakePackage):
 
     version('develop', branch='develop')
     version('lukasz', branch='lukasz/develop')
+    version('0.10.0', branch='Version0.10.0')
     version('0.9.62', branch='Version0.9.62')
     version('0.9.61', tag='v0.9.61-release')
     version('0.9.60', tag='v0.9.60')
@@ -35,6 +36,7 @@ class MofemFractureModule(CMakePackage):
         description='Copy user modules directory instead linking')
 
     extends('mofem-cephas')
+    depends_on('mofem-users-modules@0.10.0', when='@0.10.0')
     depends_on('mofem-users-modules@0.9.2', when='@0.9.62')
     depends_on('mofem-users-modules@0.9.1', when='@0.9.61')
     depends_on('mofem-users-modules@0.9.0', when='@0.9.60')
