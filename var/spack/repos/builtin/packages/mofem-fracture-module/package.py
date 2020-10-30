@@ -80,11 +80,14 @@ class MofemFractureModule(CMakePackage):
             '-DUM_INSTALL_PREFIX=%s' % spec['mofem-users-modules'].prefix,
             # BREFIX is a spelling bug added here for back compatibility
             '-DUM_INSTALL_BREFIX=%s' % spec['mofem-users-modules'].prefix,
-            '-DMORTAR_CONTACT_INSTALL_PREFIX=%s' 
-            % spec['mofem-mortar-contact'].prefix,
             '-DEXTERNAL_MODULE_SOURCE_DIRS=%s' % source,
             '-DSTAND_ALLONE_USERS_MODULES=%s' %
             ('YES' if '+copy_user_modules' in spec else 'NO')])
+
+        if self.spec.version >= Version('0.10.0'):
+            options.extend(
+              ['-DMORTAR_CONTACT_INSTALL_PREFIX=%s' % 
+              spec['mofem-mortar-contact'].prefix])
 
         # Set module version
         if self.spec.version == Version('develop') or \
