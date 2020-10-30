@@ -11,7 +11,7 @@ class MofemSoftmech(CMakePackage):
     """mofem softmech library"""
 
     homepage = "http://mofem.eng.gla.ac.uk"
-    git = "https://IgnatiosAthanasiadis@bitbucket.org/mofem/mortar_contact.git "
+    git = "https://IgnatiosAthanasiadis@bitbucket.org/mofem/mortar_contact.git"
 
     maintainers = ['likask', 'IgnatiosAthanasiadis']
 

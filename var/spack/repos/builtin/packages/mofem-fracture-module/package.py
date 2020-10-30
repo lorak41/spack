@@ -37,6 +37,7 @@ class MofemFractureModule(CMakePackage):
 
     extends('mofem-cephas')
     depends_on('mofem-users-modules@0.10.0', when='@0.10.0')
+    depends_on('mofem-mortar-contact@0.10.0', when='@0.10.0')
     depends_on('mofem-users-modules@0.9.2', when='@0.9.62')
     depends_on('mofem-users-modules@0.9.1', when='@0.9.61')
     depends_on('mofem-users-modules@0.9.0', when='@0.9.60')
