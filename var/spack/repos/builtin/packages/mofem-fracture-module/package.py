@@ -77,7 +77,11 @@ class MofemFractureModule(CMakePackage):
         options.extend([
             '-DWITH_SPACK=YES',
             '-DEXTERNAL_MODULES_BUILD=YES',
+            '-DUM_INSTALL_PREFIX=%s' % spec['mofem-users-modules'].prefix,
+            # BREFIX is a spelling bug added here for back compatibility
             '-DUM_INSTALL_BREFIX=%s' % spec['mofem-users-modules'].prefix,
+            '-DMORTAR_CONTACT_INSTALL_PREFIX=%s' 
+            % spec['mofem-mortar-contact'].prefix,
             '-DEXTERNAL_MODULE_SOURCE_DIRS=%s' % source,
             '-DSTAND_ALLONE_USERS_MODULES=%s' %
             ('YES' if '+copy_user_modules' in spec else 'NO')])
