@@ -47,6 +47,8 @@ class MofemFractureModule(CMakePackage):
     depends_on('mofem-users-modules@0.8.15', when='@0.9.48')
     depends_on('mofem-users-modules@develop', when='@develop')
     depends_on('mofem-users-modules@lukasz', when='@lukasz')
+    depends_on('mofem-mortar-contact@develop', when='develop')
+    depends_on('mofem-mortar-contact@develop', when='lukasz')
     depends_on("mofem-users-modules", type=('build', 'link', 'run'))
 
     # The CMakeLists.txt installed with mofem-cephas package set cmake
@@ -84,7 +86,9 @@ class MofemFractureModule(CMakePackage):
             '-DSTAND_ALLONE_USERS_MODULES=%s' %
             ('YES' if '+copy_user_modules' in spec else 'NO')])
 
-        if self.spec.version >= Version('0.10.0'):
+        if self.spec.version >= Version('0.10.0') or \
+          self.spec.version == Version('develop') or \
+          self.spec.version == Version('lukasz'):
             options.extend(
               ['-DMORTAR_CONTACT_INSTALL_PREFIX=%s' % 
               spec['mofem-mortar-contact'].prefix])
