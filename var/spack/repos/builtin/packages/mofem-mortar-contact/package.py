@@ -18,6 +18,8 @@ class MofemMortarContact(CMakePackage):
     version('develop', branch='develop')
     version('0.10.0', branch='Version0.10.0')
 
+    variant('install_id', values=int, default=0,
+        description='Internal install Id used by Jenkins')
     variant('copy_user_modules', default=True,
         description='Copy user modules directory instead linking')
 
