@@ -36,8 +36,8 @@ class MofemFractureModule(CMakePackage):
         description='Copy user modules directory instead linking')
 
     extends('mofem-cephas')
+    depends_on('mofem-mortar-contact@0.10.0', when='@0.10.0:')
     depends_on('mofem-users-modules@0.10.0', when='@0.10.0')
-    depends_on('mofem-mortar-contact@0.10.0', when='@0.10.0')
     depends_on('mofem-users-modules@0.9.2', when='@0.9.62')
     depends_on('mofem-users-modules@0.9.1', when='@0.9.61')
     depends_on('mofem-users-modules@0.9.0', when='@0.9.60')
@@ -45,10 +45,10 @@ class MofemFractureModule(CMakePackage):
     depends_on('mofem-users-modules@0.8.17:', when='@0.9.50')
     depends_on('mofem-users-modules@0.8.16', when='@0.9.49')
     depends_on('mofem-users-modules@0.8.15', when='@0.9.48')
-    depends_on('mofem-users-modules@develop', when='@develop')
-    depends_on('mofem-users-modules@lukasz', when='@lukasz')
     depends_on('mofem-mortar-contact@develop', when='develop')
     depends_on('mofem-mortar-contact@develop', when='lukasz')
+    depends_on('mofem-users-modules@develop', when='@develop')
+    depends_on('mofem-users-modules@lukasz', when='@lukasz')
     depends_on("mofem-users-modules", type=('build', 'link', 'run'))
 
     # The CMakeLists.txt installed with mofem-cephas package set cmake
