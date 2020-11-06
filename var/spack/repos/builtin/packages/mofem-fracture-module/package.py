@@ -50,7 +50,8 @@ class MofemFractureModule(CMakePackage):
     depends_on('mofem-users-modules@develop', when='@develop')
     depends_on('mofem-users-modules@lukasz', when='@lukasz')
     depends_on("mofem-users-modules", type=('build', 'link', 'run'))
-    depends_on("mofem-mortar-contact", type=('build', 'link', 'run'))
+    depends_on("mofem-mortar-contact", 
+      type=('build', 'link', 'run'), when='@0.10.0')
 
     # The CMakeLists.txt installed with mofem-cephas package set cmake
     # environment to install extension from extension repository. It searches
