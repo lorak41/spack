@@ -1,11 +1,7 @@
-# Copyright 2013-2019 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2020 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
-
-from spack import *
-import glob
-import os
 
 
 class Superlu(Package):
@@ -16,8 +12,8 @@ class Superlu(Package):
     homepage = "http://crd-legacy.lbl.gov/~xiaoye/SuperLU/#superlu"
     url      = "http://crd-legacy.lbl.gov/~xiaoye/SuperLU/superlu_5.2.1.tar.gz"
 
-    version('5.2.1', '3a1a9bff20cb06b7d97c46d337504447')
-    version('4.3', 'b72c6309f25e9660133007b82621ba7c')
+    version('5.2.1', sha256='28fb66d6107ee66248d5cf508c79de03d0621852a0ddeba7301801d3d859f463')
+    version('4.3', sha256='169920322eb9b9c6a334674231479d04df72440257c17870aaa0139d74416781')
 
     variant('pic',    default=True,
             description='Build with position independent code')
@@ -64,19 +60,19 @@ class Superlu(Package):
             'ARCH       = ar',
             'ARCHFLAGS  = cr',
             'RANLIB     = {0}'.format('ranlib' if which('ranlib') else 'echo'),
-            'CC         = {0}'.format(os.environ['CC']),
-            'FORTRAN    = {0}'.format(os.environ['FC']),
-            'LOADER     = {0}'.format(os.environ['CC']),
+            'CC         = {0}'.format(env['CC']),
+            'FORTRAN    = {0}'.format(env['FC']),
+            'LOADER     = {0}'.format(env['CC']),
             'CDEFS      = -DAdd_'
         ])
 
         if '+pic' in spec:
             config.extend([
                 # Use these lines instead when pic_flag capability arrives
-                'CFLAGS     = -O3 {0}'.format(self.compiler.pic_flag),
-                'NOOPTS     = {0}'.format(self.compiler.pic_flag),
-                'FFLAGS     = -O2 {0}'.format(self.compiler.pic_flag),
-                'LOADOPTS   = {0}'.format(self.compiler.pic_flag)
+                'CFLAGS     = -O3 {0}'.format(self.compiler.cc_pic_flag),
+                'NOOPTS     = {0}'.format(self.compiler.cc_pic_flag),
+                'FFLAGS     = -O2 {0}'.format(self.compiler.f77_pic_flag),
+                'LOADOPTS   = {0}'.format(self.compiler.cc_pic_flag)
             ])
         else:
             config.extend([
@@ -95,7 +91,5 @@ class Superlu(Package):
 
         # Install manually
         install_tree('lib', prefix.lib)
-        headers = glob.glob(join_path('SRC', '*.h'))
         mkdir(prefix.include)
-        for h in headers:
-            install(h, prefix.include)
+        install(join_path('SRC', '*.h'), prefix.include)

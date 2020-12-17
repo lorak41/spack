@@ -1,4 +1,4 @@
-# Copyright 2013-2019 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2020 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
@@ -6,7 +6,7 @@
 from spack import *
 
 
-class EcpIoSdk(CMakePackage):
+class EcpIoSdk(BundlePackage):
     """ECP I/O Services SDK"""
 
     homepage = "https://github.com/chuckatkins/ecp-data-viz-sdk"
@@ -16,30 +16,19 @@ class EcpIoSdk(CMakePackage):
 
     version('1.0', branch='master')
 
-    variant('hdf5', default=True, description="Enable HDF5")
     variant('adios2', default=True, description="Enable ADIOS2")
-    variant('pnetcdf', default=True, description="Enable PNetCDF")
     variant('darshan', default=True, description="Enable Darshan")
-    variant('mercury', default=True, description="Enable Mercury")
+    variant('faodel', default=False, description="Enable FAODEL")
+    variant('hdf5', default=True, description="Enable HDF5")
+    variant('pnetcdf', default=True, description="Enable PNetCDF")
+    variant('unifyfs', default=True, description="Enable UnifyFS")
+    variant('veloc', default=True, description="Enable VeloC")
 
-    # Broken dependency: boost
-    # variant('veloc', default=False, description="Enable VeloC")
-
-    # Missing dependency: margo
-    # variant('unifycr', default=False, description="Enable UnifyCR")
-
-    # Currently no spack packages
-    # variant('romio', default=False, description="Enable ROMIO")
-    # variant('faodel', default=False, description="Enable FAODEL")
-
-    depends_on('hdf5', when='+hdf5')
-    depends_on('adios2', when='+adios2')
-    depends_on('parallel-netcdf', when='+pnetcdf')
-    depends_on('veloc', when='+veloc')
-    depends_on('unifycr', when='+unifycr')
-    depends_on('darshan-runtime', when='+darshan')
+    depends_on('adios2+shared+mpi+fortran+python+zfp+sz+blosc+hdf5+sst+ssc+dataman', when='+adios2')
+    depends_on('darshan-runtime+mpi', when='+darshan')
     depends_on('darshan-util', when='+darshan')
-    depends_on('mercury', when='+mercury')
-
-    def cmake_args(self):
-        return ['-DIO=ON']
+    depends_on('faodel+shared+mpi+hdf5 network=libfabric', when='+faodel')
+    depends_on('hdf5+shared+mpi+fortran', when='+hdf5')
+    depends_on('parallel-netcdf+shared+fortran', when='+pnetcdf')
+    depends_on('unifyfs+fortran+hdf5', when='+unifyfs')
+    depends_on('veloc', when='+veloc')

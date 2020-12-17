@@ -1,4 +1,4 @@
-# Copyright 2013-2019 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2020 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
@@ -10,19 +10,22 @@ from spack import *
 class Med(CMakePackage):
     """The MED file format is a specialization of the HDF5 standard."""
 
-    homepage = "https://docs.salome-platform.org/latest/dev/MEDCoupling/user/html/index.html"
-    
-    maintainers = ['likask', 'hoangnguyence']
+    homepage = "http://docs.salome-platform.org/latest/dev/MEDCoupling/med-file.html"
+    url = "http://files.salome-platform.org/Salome/other/med-3.2.0.tar.gz"
 
-    version('3.2.0', 'eb61df92f0624feb6328f517cd756a23', url='http://files.salome-platform.org/Salome/other/med-3.2.0.tar.gz')
-    version('3.3.1', '4981a02fa50b1a487a022804512631ff', url='http://files.salome-platform.org/Salome/other/med-3.3.1.tar.gz')
-    version('4.0.0', 'ef903d0dc165fc72818ab264ebb6e8ba', url='http://files.salome-platform.org/Salome/other/med-4.0.0.tar.gz')
+    maintainers = ['likask']
+
+    version('4.0.0', sha256='a474e90b5882ce69c5e9f66f6359c53b8b73eb448c5f631fa96e8cd2c14df004')
+    version('3.2.0', sha256='d52e9a1bdd10f31aa154c34a5799b48d4266dc6b4a5ee05a9ceda525f2c6c138')
 
     variant('api23', default=True, description='Enable API2.3')
 
     depends_on('mpi')
-    depends_on('hdf5@:1.8.19+mpi', when='@:3.99.99')
-    depends_on('hdf5@:1.10.5+mpi', when='@4.0.0:') 
+    depends_on('hdf5@:1.8.19+mpi', when='@3.2.0')
+    depends_on('hdf5@:1.10.2+mpi', when='@4.0.0')
+
+    # C++11 requires a space between literal and identifier
+    patch('add_space.patch', when='@3.2.0')
 
     # FIXME This is minimal installation.
 
