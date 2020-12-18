@@ -22,10 +22,13 @@ class Med(CMakePackage):
 
     depends_on('mpi')
     depends_on('hdf5@:1.8.19+mpi', when='@3.2.0')
-    depends_on('hdf5@:1.10.2+mpi', when='@4.0.0')
+    depends_on('hdf5@:1.10.7+mpi', when='@4.0.0')
 
     # C++11 requires a space between literal and identifier
     patch('add_space.patch', when='@3.2.0')
+
+    # Fixing definitions of constacts 
+    patch('med_definition.patch')
 
     # FIXME This is minimal installation.
 

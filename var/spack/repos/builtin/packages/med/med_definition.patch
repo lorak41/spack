@@ -1,0 +1,425 @@
+diff -ruN med-4.0.0/tests/c/2.3.1/test10.c med_build/med-4.0.0/tests/c/2.3.1/test10.c
+--- med-4.0.0/tests/c/2.3.1/test10.c	2018-12-10 10:17:59.000000000 +0000
++++ med_build/med-4.0.0/tests/c/2.3.1/test10.c	2020-12-18 20:43:14.000000000 +0000
+@@ -14,10 +14,10 @@
+  *  You should have received a copy of the GNU Lesser General Public License
+  *  along with MED.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-#define _a 0.446948490915965
+-#define _b 0.091576213509771
+-#define _p1 0.11169079483905
+-#define _p2 0.0549758718227661
++#define _med_a 0.446948490915965
++#define _med_b 0.091576213509771
++#define _med_p1 0.11169079483905
++#define _med_p2 0.0549758718227661
+ 
+ /******************************************************************************
+  * - Nom du fichier : test10.c
+@@ -72,9 +72,9 @@
+ 
+   /* Constantes */
+ 
+-  med_float gscoo1_1[12] = { 2*_b-1, 1-4*_b, 2*_b-1, 2*_b-1, 1-4*_b, 
+-                             2*_b-1, 1-4*_a, 2*_a-1, 2*_a-1, 1-4*_a, 2*_a-1, 2*_a-1 }; 
+-  med_float wg1_1[6] = { 4*_p2, 4*_p2, 4*_p2, 4*_p1, 4*_p1, 4*_p1 }; 
++  med_float gscoo1_1[12] = { 2*_med_b-1, 1-4*_med_b, 2*_med_b-1, 2*_med_b-1, 1-4*_med_b, 
++                             2*_med_b-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1 }; 
++  med_float wg1_1[6] = { 4*_med_p2, 4*_med_p2, 4*_med_p2, 4*_med_p1, 4*_med_p1, 4*_med_p1 }; 
+ 
+   med_int   nval1_1= 1*6; /*1 valeurs et 6 points de gauss par valeur */
+   med_float valr1_1[1*6*2]  = {0.0,1.0, 2.0,3.0, 10.0,11.0, 12.0,13.0, 20.0,21.0, 22.0,23.0};  /* 2 composantes*/
+diff -ruN med-4.0.0/tests/c/2.3.2/test10.c med_build/med-4.0.0/tests/c/2.3.2/test10.c
+--- med-4.0.0/tests/c/2.3.2/test10.c	2018-12-10 10:17:59.000000000 +0000
++++ med_build/med-4.0.0/tests/c/2.3.2/test10.c	2020-12-18 20:43:14.000000000 +0000
+@@ -14,10 +14,10 @@
+  *  You should have received a copy of the GNU Lesser General Public License
+  *  along with MED.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-#define _a 0.446948490915965
+-#define _b 0.091576213509771
+-#define _p1 0.11169079483905
+-#define _p2 0.0549758718227661
++#define _med_a 0.446948490915965
++#define _med_b 0.091576213509771
++#define _med_p1 0.11169079483905
++#define _med_p2 0.0549758718227661
+ 
+ /******************************************************************************
+  * - Nom du fichier : test10.c
+@@ -72,9 +72,9 @@
+ 
+   /* Constantes */
+ 
+-  med_float gscoo1_1[12] = { 2*_b-1, 1-4*_b, 2*_b-1, 2*_b-1, 1-4*_b, 
+-                             2*_b-1, 1-4*_a, 2*_a-1, 2*_a-1, 1-4*_a, 2*_a-1, 2*_a-1 }; 
+-  med_float wg1_1[6] = { 4*_p2, 4*_p2, 4*_p2, 4*_p1, 4*_p1, 4*_p1 }; 
++  med_float gscoo1_1[12] = { 2*_med_b-1, 1-4*_med_b, 2*_med_b-1, 2*_med_b-1, 1-4*_med_b, 
++                             2*_med_b-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1 }; 
++  med_float wg1_1[6] = { 4*_med_p2, 4*_med_p2, 4*_med_p2, 4*_med_p1, 4*_med_p1, 4*_med_p1 }; 
+ 
+   med_int   nval1_1= 1*6; /*1 valeurs et 6 points de gauss par valeur */
+   med_float valr1_1[1*6*2]  = {0.0,1.0, 2.0,3.0, 10.0,11.0, 12.0,13.0, 20.0,21.0, 22.0,23.0};  /* 2 composantes*/
+diff -ruN med-4.0.0/tests/c/2.3.6/test10.c med_build/med-4.0.0/tests/c/2.3.6/test10.c
+--- med-4.0.0/tests/c/2.3.6/test10.c	2018-12-10 10:17:58.000000000 +0000
++++ med_build/med-4.0.0/tests/c/2.3.6/test10.c	2020-12-18 20:43:14.000000000 +0000
+@@ -14,10 +14,10 @@
+  *  You should have received a copy of the GNU Lesser General Public License
+  *  along with MED.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-#define _a 0.446948490915965
+-#define _b 0.091576213509771
+-#define _p1 0.11169079483905
+-#define _p2 0.0549758718227661
++#define _med_a 0.446948490915965
++#define _med_b 0.091576213509771
++#define _med_p1 0.11169079483905
++#define _med_p2 0.0549758718227661
+ 
+ /******************************************************************************
+  * - Nom du fichier : test10.c
+@@ -75,9 +75,9 @@
+ 
+   /* Constantes */
+ 
+-  med_float gscoo1_1[12] = { 2*_b-1, 1-4*_b, 2*_b-1, 2*_b-1, 1-4*_b, 
+-                             2*_b-1, 1-4*_a, 2*_a-1, 2*_a-1, 1-4*_a, 2*_a-1, 2*_a-1 }; 
+-  med_float wg1_1[6] = { 4*_p2, 4*_p2, 4*_p2, 4*_p1, 4*_p1, 4*_p1 }; 
++  med_float gscoo1_1[12] = { 2*_med_b-1, 1-4*_med_b, 2*_med_b-1, 2*_med_b-1, 1-4*_med_b, 
++                             2*_med_b-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1 }; 
++  med_float wg1_1[6] = { 4*_med_p2, 4*_med_p2, 4*_med_p2, 4*_med_p1, 4*_med_p1, 4*_med_p1 }; 
+ 
+   med_int   nval1_1= 1*6; /*1 valeurs et 6 points de gauss par valeur */
+   med_float valr1_1[1*6*2]  = {0.0,1.0, 2.0,3.0, 10.0,11.0, 12.0,13.0, 20.0,21.0, 22.0,23.0};  /* 2 composantes*/
+diff -ruN med-4.0.0/tests/c/3.2.1/test10.c med_build/med-4.0.0/tests/c/3.2.1/test10.c
+--- med-4.0.0/tests/c/3.2.1/test10.c	2017-07-10 15:25:25.000000000 +0100
++++ med_build/med-4.0.0/tests/c/3.2.1/test10.c	2020-12-18 20:43:14.000000000 +0000
+@@ -14,10 +14,10 @@
+  *  You should have received a copy of the GNU Lesser General Public License
+  *  along with MED.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-#define _a 0.446948490915965
+-#define _b 0.091576213509771
+-#define _p1 0.11169079483905
+-#define _p2 0.0549758718227661
++#define _med_a 0.446948490915965
++#define _med_b 0.091576213509771
++#define _med_p1 0.11169079483905
++#define _med_p2 0.0549758718227661
+ 
+ /******************************************************************************
+  * - Nom du fichier : test10.c
+@@ -75,9 +75,9 @@
+ 
+   /* Constantes */
+ 
+-  med_float gscoo1_1[12] = { 2*_b-1, 1-4*_b, 2*_b-1, 2*_b-1, 1-4*_b,
+-                             2*_b-1, 1-4*_a, 2*_a-1, 2*_a-1, 1-4*_a, 2*_a-1, 2*_a-1 };
+-  med_float wg1_1[6] = { 4*_p2, 4*_p2, 4*_p2, 4*_p1, 4*_p1, 4*_p1 };
++  med_float gscoo1_1[12] = { 2*_med_b-1, 1-4*_med_b, 2*_med_b-1, 2*_med_b-1, 1-4*_med_b,
++                             2*_med_b-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1 };
++  med_float wg1_1[6] = { 4*_med_p2, 4*_med_p2, 4*_med_p2, 4*_med_p1, 4*_med_p1, 4*_med_p1 };
+ 
+   med_int   nval1_1= 1*6; /*1 valeurs et 6 points de gauss par valeur */
+   med_int   _nent1_1= 1; /*1 valeurs et 6 points de gauss par valeur */
+diff -ruN med-4.0.0/tests/c/test10.c med_build/med-4.0.0/tests/c/test10.c
+--- med-4.0.0/tests/c/test10.c	2018-12-10 10:17:58.000000000 +0000
++++ med_build/med-4.0.0/tests/c/test10.c	2020-12-18 20:43:14.000000000 +0000
+@@ -14,10 +14,10 @@
+  *  You should have received a copy of the GNU Lesser General Public License
+  *  along with MED.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-#define _a 0.446948490915965
+-#define _b 0.091576213509771
+-#define _p1 0.11169079483905
+-#define _p2 0.0549758718227661
++#define _med_a 0.446948490915965
++#define _med_b 0.091576213509771
++#define _med_p1 0.11169079483905
++#define _med_p2 0.0549758718227661
+ 
+ /******************************************************************************
+  * - Nom du fichier : test10.c
+@@ -103,9 +103,9 @@
+ 
+   /* Constantes */
+ 
+-  med_float gscoo1_1[12] = { 2*_b-1, 1-4*_b, 2*_b-1, 2*_b-1, 1-4*_b,
+-                             2*_b-1, 1-4*_a, 2*_a-1, 2*_a-1, 1-4*_a, 2*_a-1, 2*_a-1 };
+-  med_float wg1_1[6] = { 4*_p2, 4*_p2, 4*_p2, 4*_p1, 4*_p1, 4*_p1 };
++  med_float gscoo1_1[12] = { 2*_med_b-1, 1-4*_med_b, 2*_med_b-1, 2*_med_b-1, 1-4*_med_b,
++                             2*_med_b-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1 };
++  med_float wg1_1[6] = { 4*_med_p2, 4*_med_p2, 4*_med_p2, 4*_med_p1, 4*_med_p1, 4*_med_p1 };
+ 
+   med_int   nval1_1= 1*6; /*1 valeurs et 6 points de gauss par valeur */
+   med_int   _nent1_1= 1; /*1 valeurs et 6 points de gauss par valeur */
+diff -ruN med-4.0.0/tests/c/test10_f32.c med_build/med-4.0.0/tests/c/test10_f32.c
+--- med-4.0.0/tests/c/test10_f32.c	2018-12-10 17:42:27.000000000 +0000
++++ med_build/med-4.0.0/tests/c/test10_f32.c	2020-12-18 20:43:14.000000000 +0000
+@@ -14,10 +14,10 @@
+  *  You should have received a copy of the GNU Lesser General Public License
+  *  along with MED.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-#define _a 0.446948490915965
+-#define _b 0.091576213509771
+-#define _p1 0.11169079483905
+-#define _p2 0.0549758718227661
++#define _med_a 0.446948490915965
++#define _med_b 0.091576213509771
++#define _med_p1 0.11169079483905
++#define _med_p2 0.0549758718227661
+ 
+ /******************************************************************************
+  * - Nom du fichier : test10.c
+@@ -103,9 +103,9 @@
+ 
+   /* Constantes */
+ 
+-  med_float gscoo1_1[12] = { 2*_b-1, 1-4*_b, 2*_b-1, 2*_b-1, 1-4*_b,
+-                             2*_b-1, 1-4*_a, 2*_a-1, 2*_a-1, 1-4*_a, 2*_a-1, 2*_a-1 };
+-  med_float wg1_1[6] = { 4*_p2, 4*_p2, 4*_p2, 4*_p1, 4*_p1, 4*_p1 };
++  med_float gscoo1_1[12] = { 2*_med_b-1, 1-4*_med_b, 2*_med_b-1, 2*_med_b-1, 1-4*_med_b,
++                             2*_med_b-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1 };
++  med_float wg1_1[6] = { 4*_med_p2, 4*_med_p2, 4*_med_p2, 4*_med_p1, 4*_med_p1, 4*_med_p1 };
+ 
+   med_int   nval1_1= 1*6; /*1 valeurs et 6 points de gauss par valeur */
+   med_int   _nent1_1= 1; /*1 valeurs et 6 points de gauss par valeur */
+diff -ruN med-4.0.0/tests/c/test10_f32_i32.c med_build/med-4.0.0/tests/c/test10_f32_i32.c
+--- med-4.0.0/tests/c/test10_f32_i32.c	2018-12-10 17:42:27.000000000 +0000
++++ med_build/med-4.0.0/tests/c/test10_f32_i32.c	2020-12-18 20:43:14.000000000 +0000
+@@ -14,10 +14,10 @@
+  *  You should have received a copy of the GNU Lesser General Public License
+  *  along with MED.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-#define _a 0.446948490915965
+-#define _b 0.091576213509771
+-#define _p1 0.11169079483905
+-#define _p2 0.0549758718227661
++#define _med_a 0.446948490915965
++#define _med_b 0.091576213509771
++#define _med_p1 0.11169079483905
++#define _med_p2 0.0549758718227661
+ 
+ /******************************************************************************
+  * - Nom du fichier : test10.c
+@@ -103,9 +103,9 @@
+ 
+   /* Constantes */
+ 
+-  med_float gscoo1_1[12] = { 2*_b-1, 1-4*_b, 2*_b-1, 2*_b-1, 1-4*_b,
+-                             2*_b-1, 1-4*_a, 2*_a-1, 2*_a-1, 1-4*_a, 2*_a-1, 2*_a-1 };
+-  med_float wg1_1[6] = { 4*_p2, 4*_p2, 4*_p2, 4*_p1, 4*_p1, 4*_p1 };
++  med_float gscoo1_1[12] = { 2*_med_b-1, 1-4*_med_b, 2*_med_b-1, 2*_med_b-1, 1-4*_med_b,
++                             2*_med_b-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1 };
++  med_float wg1_1[6] = { 4*_med_p2, 4*_med_p2, 4*_med_p2, 4*_med_p1, 4*_med_p1, 4*_med_p1 };
+ 
+   med_int   nval1_1= 1*6; /*1 valeurs et 6 points de gauss par valeur */
+   med_int   _nent1_1= 1; /*1 valeurs et 6 points de gauss par valeur */
+diff -ruN med-4.0.0/tests/c/test10_f32_i64.c med_build/med-4.0.0/tests/c/test10_f32_i64.c
+--- med-4.0.0/tests/c/test10_f32_i64.c	2018-12-10 17:42:27.000000000 +0000
++++ med_build/med-4.0.0/tests/c/test10_f32_i64.c	2020-12-18 20:41:05.000000000 +0000
+@@ -14,10 +14,10 @@
+  *  You should have received a copy of the GNU Lesser General Public License
+  *  along with MED.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-#define _a 0.446948490915965
+-#define _b 0.091576213509771
+-#define _p1 0.11169079483905
+-#define _p2 0.0549758718227661
++#define _med_a 0.446948490915965
++#define _med_b 0.091576213509771
++#define _med_p1 0.11169079483905
++#define _med_p2 0.0549758718227661
+ 
+ /******************************************************************************
+  * - Nom du fichier : test10.c
+@@ -103,9 +103,9 @@
+ 
+   /* Constantes */
+ 
+-  med_float gscoo1_1[12] = { 2*_b-1, 1-4*_b, 2*_b-1, 2*_b-1, 1-4*_b,
+-                             2*_b-1, 1-4*_a, 2*_a-1, 2*_a-1, 1-4*_a, 2*_a-1, 2*_a-1 };
+-  med_float wg1_1[6] = { 4*_p2, 4*_p2, 4*_p2, 4*_p1, 4*_p1, 4*_p1 };
++  med_float gscoo1_1[12] = { 2*_med_b-1, 1-4*_med_b, 2*_med_b-1, 2*_med_b-1, 1-4*_med_b,
++                             2*_med_b-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1 };
++  med_float wg1_1[6] = { 4*_med_p2, 4*_med_p2, 4*_med_p2, 4*_med_p1, 4*_med_p1, 4*_med_p1 };
+ 
+   med_int   nval1_1= 1*6; /*1 valeurs et 6 points de gauss par valeur */
+   med_int   _nent1_1= 1; /*1 valeurs et 6 points de gauss par valeur */
+diff -ruN med-4.0.0/tests/c/test10_i32.c med_build/med-4.0.0/tests/c/test10_i32.c
+--- med-4.0.0/tests/c/test10_i32.c	2018-12-10 17:42:27.000000000 +0000
++++ med_build/med-4.0.0/tests/c/test10_i32.c	2020-12-18 20:43:14.000000000 +0000
+@@ -14,10 +14,10 @@
+  *  You should have received a copy of the GNU Lesser General Public License
+  *  along with MED.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-#define _a 0.446948490915965
+-#define _b 0.091576213509771
+-#define _p1 0.11169079483905
+-#define _p2 0.0549758718227661
++#define _med_a 0.446948490915965
++#define _med_b 0.091576213509771
++#define _med_p1 0.11169079483905
++#define _med_p2 0.0549758718227661
+ 
+ /******************************************************************************
+  * - Nom du fichier : test10.c
+@@ -103,9 +103,9 @@
+ 
+   /* Constantes */
+ 
+-  med_float gscoo1_1[12] = { 2*_b-1, 1-4*_b, 2*_b-1, 2*_b-1, 1-4*_b,
+-                             2*_b-1, 1-4*_a, 2*_a-1, 2*_a-1, 1-4*_a, 2*_a-1, 2*_a-1 };
+-  med_float wg1_1[6] = { 4*_p2, 4*_p2, 4*_p2, 4*_p1, 4*_p1, 4*_p1 };
++  med_float gscoo1_1[12] = { 2*_med_b-1, 1-4*_med_b, 2*_med_b-1, 2*_med_b-1, 1-4*_med_b,
++                             2*_med_b-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1 };
++  med_float wg1_1[6] = { 4*_med_p2, 4*_med_p2, 4*_med_p2, 4*_med_p1, 4*_med_p1, 4*_med_p1 };
+ 
+   med_int   nval1_1= 1*6; /*1 valeurs et 6 points de gauss par valeur */
+   med_int   _nent1_1= 1; /*1 valeurs et 6 points de gauss par valeur */
+diff -ruN med-4.0.0/tests/c/test10_i64.c med_build/med-4.0.0/tests/c/test10_i64.c
+--- med-4.0.0/tests/c/test10_i64.c	2018-12-10 17:42:27.000000000 +0000
++++ med_build/med-4.0.0/tests/c/test10_i64.c	2020-12-18 20:43:14.000000000 +0000
+@@ -14,10 +14,10 @@
+  *  You should have received a copy of the GNU Lesser General Public License
+  *  along with MED.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-#define _a 0.446948490915965
+-#define _b 0.091576213509771
+-#define _p1 0.11169079483905
+-#define _p2 0.0549758718227661
++#define _med_a 0.446948490915965
++#define _med_b 0.091576213509771
++#define _med_p1 0.11169079483905
++#define _med_p2 0.0549758718227661
+ 
+ /******************************************************************************
+  * - Nom du fichier : test10.c
+@@ -103,9 +103,9 @@
+ 
+   /* Constantes */
+ 
+-  med_float gscoo1_1[12] = { 2*_b-1, 1-4*_b, 2*_b-1, 2*_b-1, 1-4*_b,
+-                             2*_b-1, 1-4*_a, 2*_a-1, 2*_a-1, 1-4*_a, 2*_a-1, 2*_a-1 };
+-  med_float wg1_1[6] = { 4*_p2, 4*_p2, 4*_p2, 4*_p1, 4*_p1, 4*_p1 };
++  med_float gscoo1_1[12] = { 2*_med_b-1, 1-4*_med_b, 2*_med_b-1, 2*_med_b-1, 1-4*_med_b,
++                             2*_med_b-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1 };
++  med_float wg1_1[6] = { 4*_med_p2, 4*_med_p2, 4*_med_p2, 4*_med_p1, 4*_med_p1, 4*_med_p1 };
+ 
+   med_int   nval1_1= 1*6; /*1 valeurs et 6 points de gauss par valeur */
+   med_int   _nent1_1= 1; /*1 valeurs et 6 points de gauss par valeur */
+diff -ruN med-4.0.0/tests/c/test10_mem.c med_build/med-4.0.0/tests/c/test10_mem.c
+--- med-4.0.0/tests/c/test10_mem.c	2017-07-10 15:25:25.000000000 +0100
++++ med_build/med-4.0.0/tests/c/test10_mem.c	2020-12-18 20:43:14.000000000 +0000
+@@ -14,10 +14,10 @@
+  *  You should have received a copy of the GNU Lesser General Public License
+  *  along with MED.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-#define _a 0.446948490915965
+-#define _b 0.091576213509771
+-#define _p1 0.11169079483905
+-#define _p2 0.0549758718227661
++#define _med_a 0.446948490915965
++#define _med_b 0.091576213509771
++#define _med_p1 0.11169079483905
++#define _med_p2 0.0549758718227661
+ 
+ /******************************************************************************
+  * - Nom du fichier : test10_mem.c
+@@ -74,9 +74,9 @@
+ 
+   /* Constantes */
+ 
+-  med_float gscoo1_1[12] = { 2*_b-1, 1-4*_b, 2*_b-1, 2*_b-1, 1-4*_b,
+-                             2*_b-1, 1-4*_a, 2*_a-1, 2*_a-1, 1-4*_a, 2*_a-1, 2*_a-1 };
+-  med_float wg1_1[6] = { 4*_p2, 4*_p2, 4*_p2, 4*_p1, 4*_p1, 4*_p1 };
++  med_float gscoo1_1[12] = { 2*_med_b-1, 1-4*_med_b, 2*_med_b-1, 2*_med_b-1, 1-4*_med_b,
++                             2*_med_b-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1 };
++  med_float wg1_1[6] = { 4*_med_p2, 4*_med_p2, 4*_med_p2, 4*_med_p1, 4*_med_p1, 4*_med_p1 };
+ 
+   med_int   nval1_1= 1*6; /*1 valeurs et 6 points de gauss par valeur */
+   med_int   _nent1_1= 1; /*1 valeurs et 6 points de gauss par valeur */
+diff -ruN med-4.0.0/tests/python/test10_f32_i32.py med_build/med-4.0.0/tests/python/test10_f32_i32.py
+--- med-4.0.0/tests/python/test10_f32_i32.py	2018-12-10 17:44:17.000000000 +0000
++++ med_build/med-4.0.0/tests/python/test10_f32_i32.py	2020-12-18 20:42:23.000000000 +0000
+@@ -18,7 +18,7 @@
+ #  */
+ #from __future__ import division 
+ 
+-_a=0.446948490915965
++_med_a=0.446948490915965
+ _b=0.091576213509771
+ _p1=0.11169079483905
+ _p2=0.0549758718227661
+@@ -71,7 +71,7 @@
+ # /* Constantes */
+ 
+ gscoo1_1= MEDFLOAT([ 2*_b-1, 1-4*_b, 2*_b-1, 2*_b-1, 1-4*_b,
+-                     2*_b-1, 1-4*_a, 2*_a-1, 2*_a-1, 1-4*_a, 2*_a-1, 2*_a-1 ])
++                     2*_b-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1 ])
+ wg1_1   = MEDFLOAT([ 4*_p2, 4*_p2, 4*_p2, 4*_p1, 4*_p1, 4*_p1 ])
+ 
+ nval1_1  = 1*6; #/*1 valeurs et 6 points de gauss par valeur */
+diff -ruN med-4.0.0/tests/python/test10_f32_i64.py med_build/med-4.0.0/tests/python/test10_f32_i64.py
+--- med-4.0.0/tests/python/test10_f32_i64.py	2018-12-10 17:42:32.000000000 +0000
++++ med_build/med-4.0.0/tests/python/test10_f32_i64.py	2020-12-18 20:42:23.000000000 +0000
+@@ -18,7 +18,7 @@
+ #  */
+ #from __future__ import division 
+ 
+-_a=0.446948490915965
++_med_a=0.446948490915965
+ _b=0.091576213509771
+ _p1=0.11169079483905
+ _p2=0.0549758718227661
+@@ -71,7 +71,7 @@
+ # /* Constantes */
+ 
+ gscoo1_1= MEDFLOAT([ 2*_b-1, 1-4*_b, 2*_b-1, 2*_b-1, 1-4*_b,
+-                     2*_b-1, 1-4*_a, 2*_a-1, 2*_a-1, 1-4*_a, 2*_a-1, 2*_a-1 ])
++                     2*_b-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1 ])
+ wg1_1   = MEDFLOAT([ 4*_p2, 4*_p2, 4*_p2, 4*_p1, 4*_p1, 4*_p1 ])
+ 
+ nval1_1  = 1*6; #/*1 valeurs et 6 points de gauss par valeur */
+diff -ruN med-4.0.0/tests/python/test10_f64_i32.py med_build/med-4.0.0/tests/python/test10_f64_i32.py
+--- med-4.0.0/tests/python/test10_f64_i32.py	2018-12-10 17:42:32.000000000 +0000
++++ med_build/med-4.0.0/tests/python/test10_f64_i32.py	2020-12-18 20:42:23.000000000 +0000
+@@ -18,7 +18,7 @@
+ #  */
+ #from __future__ import division 
+ 
+-_a=0.446948490915965
++_med_a=0.446948490915965
+ _b=0.091576213509771
+ _p1=0.11169079483905
+ _p2=0.0549758718227661
+@@ -71,7 +71,7 @@
+ # /* Constantes */
+ 
+ gscoo1_1= MEDFLOAT([ 2*_b-1, 1-4*_b, 2*_b-1, 2*_b-1, 1-4*_b,
+-                     2*_b-1, 1-4*_a, 2*_a-1, 2*_a-1, 1-4*_a, 2*_a-1, 2*_a-1 ])
++                     2*_b-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1 ])
+ wg1_1   = MEDFLOAT([ 4*_p2, 4*_p2, 4*_p2, 4*_p1, 4*_p1, 4*_p1 ])
+ 
+ nval1_1  = 1*6; #/*1 valeurs et 6 points de gauss par valeur */
+diff -ruN med-4.0.0/tests/python/test10_f64_i64.py med_build/med-4.0.0/tests/python/test10_f64_i64.py
+--- med-4.0.0/tests/python/test10_f64_i64.py	2018-12-10 17:42:32.000000000 +0000
++++ med_build/med-4.0.0/tests/python/test10_f64_i64.py	2020-12-18 20:42:23.000000000 +0000
+@@ -18,7 +18,7 @@
+ #  */
+ #from __future__ import division 
+ 
+-_a=0.446948490915965
++_med_a=0.446948490915965
+ _b=0.091576213509771
+ _p1=0.11169079483905
+ _p2=0.0549758718227661
+@@ -71,7 +71,7 @@
+ # /* Constantes */
+ 
+ gscoo1_1= MEDFLOAT([ 2*_b-1, 1-4*_b, 2*_b-1, 2*_b-1, 1-4*_b,
+-                     2*_b-1, 1-4*_a, 2*_a-1, 2*_a-1, 1-4*_a, 2*_a-1, 2*_a-1 ])
++                     2*_b-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1, 1-4*_med_a, 2*_med_a-1, 2*_med_a-1 ])
+ wg1_1   = MEDFLOAT([ 4*_p2, 4*_p2, 4*_p2, 4*_p1, 4*_p1, 4*_p1 ])
+ 
+ nval1_1  = 1*6; #/*1 valeurs et 6 points de gauss par valeur */
