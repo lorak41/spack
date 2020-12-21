@@ -39,7 +39,7 @@ class MofemUsersModules(CMakePackage):
 
     maintainers = ['likask']
 
-    variant('install_id', values=int, default=0,
+    variant('install_id', default=0,
         description='Internal install Id used by Jenkins')
     variant('copy_user_modules', default=True,
         description='Copy user modules directory instead linking')
@@ -73,6 +73,7 @@ class MofemUsersModules(CMakePackage):
 
         # obligatory options
         options.extend([
+            '-DCMAKE_EXPORT_COMPILE_COMMANDS=ON',
             '-DMOFEM_DIR=%s' % spec['mofem-cephas'].prefix.users_module,
             '-DWITH_SPACK=YES',
             '-DSTAND_ALLONE_USERS_MODULES=%s' %

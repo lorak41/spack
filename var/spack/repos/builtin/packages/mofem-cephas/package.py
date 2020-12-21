@@ -83,6 +83,7 @@ class MofemCephas(CMakePackage):
 
         # obligatory options
         options.extend([
+            '-DCMAKE_EXPORT_COMPILE_COMMANDS=ON',
             '-DWITH_SPACK=YES',
             '-DPETSC_DIR=%s' % spec['petsc'].prefix,
             '-DPETSC_ARCH=',
