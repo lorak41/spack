@@ -74,7 +74,7 @@ class MofemUsersModules(CMakePackage):
         # obligatory options
         options.extend([
             '-DCMAKE_EXPORT_COMPILE_COMMANDS=ON',
-            '-DMPI_RUN_FLAGS=\\"--allow-run-as-root\\"',
+            '-DMPI_RUN_FLAGS=\"--allow-run-as-root\"',
             '-DMOFEM_DIR=%s' % spec['mofem-cephas'].prefix.users_module,
             '-DWITH_SPACK=YES',
             '-DSTAND_ALLONE_USERS_MODULES=%s' %
