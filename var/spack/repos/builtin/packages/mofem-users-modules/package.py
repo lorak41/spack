@@ -97,3 +97,10 @@ class MofemUsersModules(CMakePackage):
         source = self.stage.source_path
         prefix = self.prefix
         install_tree(source, prefix.users_modules)
+
+    def check(self):
+        """Searches the CMake-generated Makefile for the target ``test``
+        and runs it if found.
+        """
+        with working_dir(self.build_directory):
+            ctest(parallel=False)
