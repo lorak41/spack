@@ -114,8 +114,6 @@ class MofemCephas(CMakePackage):
             ('YES' if '+copy_user_modules' in spec else 'NO'))
         return options
 
-    # @run_after('build')
-    # @on_package_attributes(run_tests=True)
     def check(self):
         """Searches the CMake-generated Makefile for the target ``test``
         and runs it if found.

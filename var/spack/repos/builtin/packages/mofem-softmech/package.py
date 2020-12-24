@@ -76,8 +76,6 @@ class MofemSoftmech(CMakePackage):
         prefix = self.prefix
         install_tree(source, prefix.ext_users_modules.softmech)
 
-    # @run_after('build')
-    # @on_package_attributes(run_tests=True)
     def check(self):
         """Searches the CMake-generated Makefile for the target ``test``
         and runs it if found.
