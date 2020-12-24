@@ -6,7 +6,6 @@
 
 from spack import *
 
-
 class MofemSoftmech(CMakePackage):
     """mofem softmech library"""
 
@@ -76,3 +75,12 @@ class MofemSoftmech(CMakePackage):
         source = self.stage.source_path
         prefix = self.prefix
         install_tree(source, prefix.ext_users_modules.softmech)
+
+    # @run_after('build')
+    # @on_package_attributes(run_tests=True)
+    def check(self):
+        """Searches the CMake-generated Makefile for the target ``test``
+        and runs it if found.
+        """
+        with working_dir(self.build_directory):
+            ctest(parallel=False)
