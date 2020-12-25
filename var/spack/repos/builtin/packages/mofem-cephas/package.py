@@ -77,6 +77,9 @@ class MofemCephas(CMakePackage):
 
     root_cmakelists_dir = 'mofem'
 
+    def setup_build_environment(self, env):
+        env.set('CTEST_OUTPUT_ON_FAILURE', '1')
+
     def cmake_args(self):
         spec = self.spec
         options = []

@@ -66,6 +66,9 @@ class MofemUsersModules(CMakePackage):
     depends_on('mofem-cephas@lukasz', when='@lukasz')
     depends_on('mofem-cephas@develop', when='@develop')
 
+    def setup_build_environment(self, env):
+        env.set('CTEST_OUTPUT_ON_FAILURE', '1')
+
     def cmake_args(self):
         spec = self.spec
 
