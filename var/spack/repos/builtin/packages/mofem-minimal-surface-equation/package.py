@@ -26,9 +26,6 @@ class MofemMinimalSurfaceEquation(CMakePackage):
     extends('mofem-cephas')
     depends_on("mofem-users-modules", type=('build', 'link', 'run'))
 
-    def setup_build_environment(self, env):
-        env.set('CTEST_OUTPUT_ON_FAILURE', '1')
-
     # The CMakeLists.txt installed with mofem - cephas package set cmake
     # environment to install extension from extension repository.It searches
     # for modules in user provides paths, for example in Spack source path.Also
