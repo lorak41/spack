@@ -43,6 +43,7 @@ class MofemUsersModules(CMakePackage):
         description='Internal install Id used by Jenkins')
     variant('copy_user_modules', default=True,
         description='Copy user modules directory instead linking')
+    variant('docker', default=False, description='Build in docker volume')
 
     extends('mofem-cephas')
     depends_on('mofem-cephas@0.10.0', when='@0.10.0')
@@ -68,6 +69,13 @@ class MofemUsersModules(CMakePackage):
 
     def setup_build_environment(self, env):
         env.set('CTEST_OUTPUT_ON_FAILURE', '1')
+
+    @property
+    def build_directory(self):
+        if '+docker' in self.spec:
+          return ('/mofem_install/um-build-%s' % spec.dag_hash(7))
+        else:
+          return join_path(self.stage.path, self.build_dirname)
 
     def cmake_args(self):
         spec = self.spec

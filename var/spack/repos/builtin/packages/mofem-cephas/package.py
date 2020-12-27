@@ -48,6 +48,7 @@ class MofemCephas(CMakePackage):
     variant('tetgen', default=True, description='Compile with Tetgen')
     variant('med', default=True, description='Compile with Med')
     variant('slepc', default=True, description='Compile with Slepc')
+    variant('docker', default=False, description='Build in docker volume')
 
     depends_on('mpi')
     depends_on('boost@:1.69 cxxstd=14')
@@ -88,6 +89,14 @@ class MofemCephas(CMakePackage):
     def setup_build_environment(self, env):
         env.set('CTEST_OUTPUT_ON_FAILURE', '1')
 
+    @property
+    def build_directory(self):
+        spec = self.spec
+        if '+docker' in spec:
+          return ('/mofem_install/core-build-%s' % spec.dag_hash(7))
+        else:
+          return join_path(self.stage.path, self.build_dirname)
+          
     def cmake_args(self):
         spec = self.spec
         options = []
