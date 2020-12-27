@@ -92,11 +92,13 @@ class MofemCephas(CMakePackage):
     @property
     def build_directory(self):
         spec = self.spec
+        build_type = spec.variants['build_type'].value
+        build_dir = 'core-build-%s-%s' % (build_type,spec.dag_hash(7))
         if '+docker' in spec:
-          return ('/mofem_install/core-build-%s' % spec.dag_hash(7))
+          return join_path('/mofem_install',build_dir)
         else:
-          return join_path(self.stage.path, self.build_dirname)
-          
+          return join_path(self.stage.path, build_dir)
+
     def cmake_args(self):
         spec = self.spec
         options = []
