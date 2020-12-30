@@ -22,6 +22,7 @@ class Moab(AutotoolsPackage):
 
     version('develop', branch='develop')
     version('master', branch='master')
+    version('5.2.1', tag='5.2.1')
     version('5.2.0', tag='5.2.0')
     version('5.1.0', branch='Version5.1.0')
     # Version 5.0.2 disappeared from FTP server. Instead set temporary version
