@@ -15,6 +15,7 @@ class Med(CMakePackage):
 
     maintainers = ['likask']
 
+    version('4.1.0', sha256='847db5d6fbc9ce6924cb4aea86362812c9a5ef6b9684377e4dd6879627651fce')
     version('4.0.0', sha256='a474e90b5882ce69c5e9f66f6359c53b8b73eb448c5f631fa96e8cd2c14df004')
     version('3.2.0', sha256='d52e9a1bdd10f31aa154c34a5799b48d4266dc6b4a5ee05a9ceda525f2c6c138')
 
@@ -22,13 +23,16 @@ class Med(CMakePackage):
 
     depends_on('mpi')
     depends_on('hdf5@:1.8.19+mpi', when='@3.2.0')
-    depends_on('hdf5@:1.10.7+mpi', when='@4.0.0')
+    depends_on('hdf5@:1.10.7+mpi', when='@4.0.0:')
 
     # C++11 requires a space between literal and identifier
     patch('add_space.patch', when='@3.2.0')
 
     # Fixing definitions of constacts 
     patch('med_definition.patch')
+
+    # Fixing 4.1.0
+    patch('fix_compilation_4.1.0.patch', when='@4.1.0:')
 
     # FIXME This is minimal installation.
 

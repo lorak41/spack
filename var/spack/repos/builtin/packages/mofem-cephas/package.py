@@ -78,9 +78,9 @@ class MofemCephas(CMakePackage):
     # MED install
     depends_on('med', when='+med')
     depends_on('med@:3.99.99', when='+med @0.8.7:0.9.0')
-    depends_on('med@4.0.0:', when='+med @0.9.1:')
-    depends_on('med@4.0.0:', when='+med @develop')
-    depends_on('med@4.0.0:', when='+med @lukasz')
+    depends_on('med@4.1.0:', when='+med @0.9.1:')
+    depends_on('med@4.1.0:', when='+med @develop')
+    depends_on('med@4.1.0:', when='+med @lukasz')
 
     extendable = True
 
