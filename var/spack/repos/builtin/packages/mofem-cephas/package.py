@@ -50,9 +50,14 @@ class MofemCephas(CMakePackage):
     variant('slepc', default=True, description='Compile with Slepc')
     variant('docker', default=False, description='Build in docker volume')
 
-    depends_on('mpi')
+    # build dependencies
+    depends_on('pkgconfig', type='build')
+
+    # boost
     depends_on('boost@:1.69 cxxstd=14')
-    depends_on('parmetis')
+
+    # mpi an other
+    depends_on('mpi')
 
     # PETSC install
     depends_on('petsc@:3.11.99+mumps+mpi')
@@ -74,6 +79,7 @@ class MofemCephas(CMakePackage):
     # for versions 2.6: fully resolved
     depends_on('adol-c@2.5.2~examples', when='+adol-c')
     depends_on('tetgen', when='+tetgen')
+    depends_on('parmetis')
 
     # MED install
     depends_on('med', when='+med')
