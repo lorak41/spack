@@ -1,12 +1,21 @@
-diff -Naur med-4.1.0_org/tools/medimport/4.0.0/MAJ_400_410_champs.c med-4.1.0/tools/medimport/4.0.0/MAJ_400_410_champs.c
+diff -ruN med-4.1.0_org/tools/medimport/4.0.0/MAJ_400_410_champs.c med-4.1.0/tools/medimport/4.0.0/MAJ_400_410_champs.c
 --- med-4.1.0_org/tools/medimport/4.0.0/MAJ_400_410_champs.c	2020-03-11 10:03:40.000000000 +0000
-+++ med-4.1.0/tools/medimport/4.0.0/MAJ_400_410_champs.c	2021-02-01 17:33:03.000000000 +0000
-@@ -27,7 +27,7 @@
++++ med-4.1.0/tools/medimport/4.0.0/MAJ_400_410_champs.c	2021-02-23 22:53:45.000000000 +0000
+@@ -27,7 +27,16 @@
  
  #define USER_MODE MED_COMPACT_STMODE
  
 -#include "_MEDfieldValueUpdateEntityList41.c"
 +// #include "_MEDfieldValueUpdateEntityList41.c"
++
++med_int  _MEDfieldValueUpdateEntityList(const char *            const gid0name    ,
++					const char *            const gid1name    ,
++					const med_idt                 gid0	  ,
++					const med_idt                 gid1	  ,
++					const med_entity_type         entitytype  ,
++					const med_geometry_type       geotype     ,
++					const med_bool                forentity   );
++
  
  med_err getFieldsOn40(med_idt                  fid,
  		    const char * const       nommaa,
