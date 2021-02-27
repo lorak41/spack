@@ -112,7 +112,7 @@ class MofemCephas(CMakePackage):
         # obligatory options
         options.extend([
             '-DCMAKE_EXPORT_COMPILE_COMMANDS=ON',
-            '-DMPI_RUN_FLAGS=--allow-run-as-root',
+            '-DMPI_RUN_FLAGS=--allow-run-as-root --oversubscribe',
             '-DWITH_SPACK=YES',
             '-DPETSC_DIR=%s' % spec['petsc'].prefix,
             '-DPETSC_ARCH=',
