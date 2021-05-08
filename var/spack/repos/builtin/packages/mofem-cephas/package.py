@@ -17,6 +17,8 @@ class MofemCephas(CMakePackage):
 
     version('develop', branch='develop')
     version('lukasz', branch='lukasz/develop')
+    version('0.11.1', branch='Version0.11.1')
+    version('0.11.0', branch='Version0.11.0')
     version('0.10.0', branch='Version0.10.0')
     version('0.9.2', branch='Version0.9.2')
     version('0.9.1', tag='v0.9.1-release')
@@ -80,6 +82,7 @@ class MofemCephas(CMakePackage):
     depends_on('adol-c@2.5.2~examples', when='+adol-c')
     depends_on('tetgen', when='+tetgen')
     depends_on('parmetis')
+    depends_on('blas')
 
     # MED install
     depends_on('med', when='+med')
@@ -112,12 +115,13 @@ class MofemCephas(CMakePackage):
         # obligatory options
         options.extend([
             '-DCMAKE_EXPORT_COMPILE_COMMANDS=ON',
-            '-DMPI_RUN_FLAGS=--allow-run-as-root',
+            '-DMPI_RUN_FLAGS=--allow-run-as-root --oversubscribe',
             '-DWITH_SPACK=YES',
             '-DPETSC_DIR=%s' % spec['petsc'].prefix,
             '-DPETSC_ARCH=',
             '-DMOAB_DIR=%s' % spec['moab'].prefix,
-            '-DBOOST_DIR=%s' % spec['boost'].prefix])
+            '-DBOOST_DIR=%s' % spec['boost'].prefix,
+            '-DBLAS_DIR=%s' % spec['blas'].prefix])
 
         # build tests
         options.append('-DMOFEM_BUILD_TESTS={0}'.format(
