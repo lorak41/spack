@@ -7,16 +7,15 @@
 from spack import *
 
 
-class MofemMultifieldPlasticity(CMakePackage):
-    """mofem multifield module"""
+class MofemBoneRemodelling(CMakePackage):
+    """mofem bone remodelling module"""
 
     homepage = "http://mofem.eng.gla.ac.uk"
-    git = "https://karol41@bitbucket.org/karol41/um_multifield_plasticity.git"
+    git = "https://bitbucket.org/likask/mofem_um_bone_remodelling.git"
 
-    maintainers = ['karol41']
+    maintainers = ['likask']
 
     version('develop', branch='develop')
-    version('0.1.1', tag='v0.1.1')
     version('0.1.0', tag='v0.1.0')
 
     variant('copy_user_modules', default=True,
@@ -52,6 +51,7 @@ class MofemMultifieldPlasticity(CMakePackage):
         # obligatory options
         options.extend([
             '-DWITH_SPACK=YES',
+            '-DWITH_METAIO=1',
             '-DEXTERNAL_MODULES_BUILD=YES',
             '-DUM_INSTALL_PREFIX=%s' % spec['mofem-users-modules'].prefix,
             '-DUM_INSTALL_BREFIX=%s' % spec['mofem-users-modules'].prefix,
@@ -74,5 +74,5 @@ class MofemMultifieldPlasticity(CMakePackage):
     def copy_source_code(self):
         source = self.stage.source_path
         prefix = self.prefix
-        install_tree(source, prefix.ext_users_modules.multifield)
+        install_tree(source, prefix.ext_users_modules.bone_remodel)
 
