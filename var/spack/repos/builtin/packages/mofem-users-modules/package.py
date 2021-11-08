@@ -77,6 +77,46 @@ class MofemUsersModules(CMakePackage):
     depends_on('mofem-cephas@0.8.7', when='@0.8.7')
     depends_on('mofem-cephas@lukasz', when='@lukasz')
     depends_on('mofem-cephas@develop', when='@develop')
+    
+    # Build variants
+    variant('basic_fe', default=True, description='Build basic finite elements') 
+    variant('basic_tutorials', default=True, description='Build basic tutorials') 
+    
+    variant('build_tut_fun0', default=True, description='Build tutorial')
+    variant('build_tut_fun1', default=True, description='Build tutorial')
+    variant('build_tut_fun2', default=True, description='Build tutorial')
+    variant('build_tut_msh1', default=True, description='Build tutorial')
+    variant('build_tut_msh2', default=True, description='Build tutorial')
+    variant('build_tut_scl0', default=True, description='Build tutorial')
+    variant('build_tut_scl1', default=True, description='Build tutorial')
+    variant('build_tut_scl2', default=True, description='Build tutorial')
+    variant('build_tut_scl3', default=True, description='Build tutorial')
+    variant('build_tut_scl4', default=True, description='Build tutorial')
+    variant('build_tut_scl5', default=True, description='Build tutorial')
+    variant('build_tut_scl6', default=True, description='Build tutorial')
+    variant('build_tut_scl7', default=True, description='Build tutorial')
+    variant('build_tut_scl8', default=True, description='Build tutorial')
+    variant('build_tut_scl9', default=True, description='Build tutorial')
+    variant('build_tut_scl10', default=True, description='Build tutorial')
+    variant('build_tut_clx0', default=True, description='Build tutorial')
+    variant('build_tut_vec0', default=True, description='Build tutorial')
+    variant('build_tut_vec1', default=True, description='Build tutorial')
+    variant('build_tut_vec2', default=True, description='Build tutorial')
+    variant('build_tut_vec3', default=True, description='Build tutorial')
+    variant('build_tut_vec4', default=True, description='Build tutorial')
+    variant('build_tut_mix0', default=True, description='Build tutorial')
+    variant('build_tut_max0', default=True, description='Build tutorial')
+    variant('build_tut_max1', default=True, description='Build tutorial')
+    variant('build_tut_adv0', default=True, description='Build tutorial')
+    variant('build_tut_adv1', default=True, description='Build tutorial')
+    variant('build_tut_adv2', default=True, description='Build tutorial')
+    variant('build_tut_cor0to1', default=True, description='Build tutorial')
+    variant('build_tut_cor2to5', default=True, description='Build tutorial')
+    variant('build_tut_cor6', default=True, description='Build tutorial')
+    variant('build_tut_cor7', default=True, description='Build tutorial')
+    variant('build_tut_cor8', default=True, description='Build tutorial')
+    variant('build_tut_cor9', default=True, description='Build tutorial')
+    variant('build_tut_cor10',, default=True, description='Build tutorial')
 
     def setup_build_environment(self, env):
         env.set('CTEST_OUTPUT_ON_FAILURE', '1')
@@ -108,6 +148,15 @@ class MofemUsersModules(CMakePackage):
         # build tests
         options.append('-DMOFEM_UM_BUILD_TESTS={0}'.format(
             'ON' if self.run_tests else 'OFF'))
+
+        if '+basic_fe' in spec:
+            options.append('-DBUILD_BASIC_FINITE_ELEMENTS=OFF') 
+        if '+basic_tutorials' in spec:
+	        options.append('-BUILD_TUTORIALS=OFF')
+                 
+        for variant : spec.variants:
+            if (variant.startswith('build_tut_')):
+                options.append('-%s=ON' % variant.upper())
 
         return options
 
