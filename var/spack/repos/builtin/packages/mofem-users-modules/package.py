@@ -116,7 +116,7 @@ class MofemUsersModules(CMakePackage):
     variant('build_tut_cor7', default=True, description='Build tutorial')
     variant('build_tut_cor8', default=True, description='Build tutorial')
     variant('build_tut_cor9', default=True, description='Build tutorial')
-    variant('build_tut_cor10',, default=True, description='Build tutorial')
+    variant('build_tut_cor10', default=True, description='Build tutorial')
 
     def setup_build_environment(self, env):
         env.set('CTEST_OUTPUT_ON_FAILURE', '1')
@@ -154,9 +154,12 @@ class MofemUsersModules(CMakePackage):
         if '+basic_tutorials' in spec:
 	        options.append('-BUILD_TUTORIALS=OFF')
                  
-        for variant : spec.variants:
+        for variant, v : spec.variants.items():
             if (variant.startswith('build_tut_')):
-                options.append('-%s=ON' % variant.upper())
+                if (v):
+                    options.append('-%s=ON' % variant.upper())
+                else:
+                    options.append('-%s=OFF' % variant.upper())
 
         return options
 
