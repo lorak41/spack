@@ -154,12 +154,12 @@ class MofemUsersModules(CMakePackage):
         if '+basic_tutorials' in spec:
 	        options.append('-BUILD_TUTORIALS=OFF')
                  
-        for variant, v : spec.variants.items():
-            if (variant.startswith('build_tut_')):
+        for name, v in spec.variants.items():
+            if (name.startswith('build_tut_')):
                 if (v):
-                    options.append('-%s=ON' % variant.upper())
+                    options.append('-%s=ON' % name.upper())
                 else:
-                    options.append('-%s=OFF' % variant.upper())
+                    options.append('-%s=OFF' % name.upper())
 
         return options
 
