@@ -1,4 +1,4 @@
-# Copyright 2013-2018 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2021 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
@@ -97,20 +97,17 @@ class MofemFractureModule(CMakePackage):
 
     def cmake_args(self):
         spec = self.spec
-        source = self.stage.source_path
-
-        options = []
 
         # obligatory options
-        options.extend([
-            '-DWITH_SPACK=YES',
-            '-DEXTERNAL_MODULES_BUILD=YES',
-            '-DUM_INSTALL_PREFIX=%s' % spec['mofem-users-modules'].prefix,
+        options = [
+            self.define('WITH_SPACK', True),
+            self.define('EXTERNAL_MODULES_BUILD', True),
             # BREFIX is a spelling bug added here for back compatibility
-            '-DUM_INSTALL_BREFIX=%s' % spec['mofem-users-modules'].prefix,
-            '-DEXTERNAL_MODULE_SOURCE_DIRS=%s' % source,
-            '-DSTAND_ALLONE_USERS_MODULES=%s' %
-            ('YES' if '+copy_user_modules' in spec else 'NO')])
+            self.define('UM_INSTALL_BREFIX',
+                        spec['mofem-users-modules'].prefix),
+            self.define('EXTERNAL_MODULE_SOURCE_DIRS', self.stage.source_path),
+            self.define_from_variant('STAND_ALLONE_USERS_MODULES',
+                                     'copy_user_modules')
 
         if self.spec.version >= Version('0.10.0') or \
           self.spec.version == Version('develop') or \
@@ -133,8 +130,7 @@ class MofemFractureModule(CMakePackage):
                 '-DFM_VERSION_BUILD=%s' % self.spec.version[2]])
 
         # build tests
-        options.append('-DMOFEM_UM_BUILD_TESTS={0}'.format(
-            'ON' if self.run_tests else 'OFF'))
+        options.append(self.define('MOFEM_UM_BUILD_TESTS', self.run_tests))
 
         return options
 
