@@ -107,7 +107,7 @@ class MofemFractureModule(CMakePackage):
                         spec['mofem-users-modules'].prefix),
             self.define('EXTERNAL_MODULE_SOURCE_DIRS', self.stage.source_path),
             self.define_from_variant('STAND_ALLONE_USERS_MODULES',
-                                     'copy_user_modules')
+                                     'copy_user_modules')]
 
         if self.spec.version >= Version('0.10.0') or \
           self.spec.version == Version('develop') or \
