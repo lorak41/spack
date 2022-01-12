@@ -58,7 +58,7 @@ class MofemCephas(CMakePackage):
     depends_on('pkgconfig', type='build')
 
     # boost
-    depends_on('boost@:1.69 cxxstd=14')
+    depends_on('boost@:1.69 cxxstd=17')
 
     # mpi an other
     depends_on('mpi')
