@@ -26,16 +26,13 @@ class Med(CMakePackage):
     variant('fortran', default=False, description='Enable Fortran support')
 
     depends_on('mpi', when='+mpi')
-    depends_on('hdf5@:1.8.22+mpi', when='@3.2.0+mpi')
-    depends_on('hdf5@1.10.2:1.10.7+mpi', when='@4.0.0:+mpi')
-    depends_on('hdf5@:1.8.22~mpi', when='@3.2.0~mpi')
-    depends_on('hdf5@1.10.2:1.10.7~mpi', when='@4.0.0:~mpi')
-    # the "TARGET hdf5" patch below only works with HDF5 shared library builds
-    depends_on('hdf5+shared', when='@4.0.0:4.1.99')
+    depends_on('hdf5+mpi~shared', when='+mpi ~shared')
+    depends_on('hdf5+mpi+shared', when='+mpi +shared') 
+    depends_on('hdf5~mpi~shared', when='~mpi ~shared')
+    depends_on('hdf5~mpi+shared', when='~mpi +shared')
 
-    depends_on('mpi')
-    depends_on('hdf5@:1.8.19+mpi', when='@3.2.0')
-    depends_on('hdf5@:1.10.7+mpi', when='@4.0.0:')
+    # the "TARGET hdf5" patch below only works with HDF5 shared library builds
+    depends_on('hdf5+shared', when='@4.0.0:4.1.99') 
 
     # FIXME This is minimal installation.
     conflicts("@4.1.0", when="~shared", msg="Link error when static")
