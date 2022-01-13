@@ -141,24 +141,22 @@ class MofemUsersModules(CMakePackage):
         options.extend([
             '-DCMAKE_EXPORT_COMPILE_COMMANDS=ON',
             '-DMPI_RUN_FLAGS=--allow-run-as-root',
-            '-DMOFEM_DIR=%s' % spec['mofem-cephas'].prefix.users_module,
-            '-DWITH_SPACK=YES',
-            from_variant('STAND_ALLONE_USERS_MODULES', 'copy_user_modules')])
+            '-DWITH_SPACK=YES'])
 
-        # build tests
-        options.append(self.define('MOFEM_UM_BUILD_TESTS', self.run_tests))
+        options.append(self.define(
+            'MOFEM_DIR', spec['mofem-cephas'].prefix.users_module))
+        options.append(self.define_from_variant(
+            'STAND_ALLONE_USERS_MODULES', 'copy_user_modules'))
 
-        if '+basic_fe' in spec:
-            options.append('-DBUILD_BASIC_FINITE_ELEMENTS=OFF') 
-        if '+basic_tutorials' in spec:
-	        options.append('-BUILD_TUTORIALS=OFF')
-                 
+        options.append(
+            from_variant('BUILD_BASIC_FINITE_ELEMENTS', 'basic_fe'))
+        options.append(
+            from_variant('BUILD_TUTORIALS', 'basic_tutorials'))
+
         for name, v in spec.variants.items():
             if (name.startswith('build_tut_')):
-                if (v):
-                    options.append('-%s=ON' % name.upper())
-                else:
-                    options.append('-%s=OFF' % name.upper())
+                options.append(
+                    from_variant(name.upper(), name))
 
         return options
 
