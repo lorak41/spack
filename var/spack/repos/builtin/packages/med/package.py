@@ -26,16 +26,13 @@ class Med(CMakePackage):
     variant('fortran', default=False, description='Enable Fortran support')
 
     depends_on('mpi', when='+mpi')
-    depends_on('hdf5+mpi~shared', when='+mpi ~shared')
-    depends_on('hdf5+mpi+shared', when='+mpi +shared') 
-    depends_on('hdf5~mpi~shared', when='~mpi ~shared')
-    depends_on('hdf5~mpi+shared', when='~mpi +shared')
+    depends_on('hdf5+mpi', when='+mpi')
+    depends_on('hdf5~mpi', when='~mpi')
 
     # the "TARGET hdf5" patch below only works with HDF5 shared library builds
-    depends_on('hdf5+shared', when='@4.0.0:4.1.99') 
-
+    #depends_on('hdf5+shared', when='@4.0.0:4.1.99') 
     # FIXME This is minimal installation.
-    conflicts("@4.1.0", when="~shared", msg="Link error when static")
+    #conflicts("@4.1.0", when="~shared", msg="Link error when static")
 
     # C++11 requires a space between literal and identifier
     patch('add_space.patch', when='@3.2.0')
