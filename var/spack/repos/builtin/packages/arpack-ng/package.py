@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 from spack import *
-import platform
+
 
 class ArpackNg(Package):
     """ARPACK-NG is a collection of Fortran77 subroutines designed to solve
@@ -77,7 +77,7 @@ class ArpackNg(Package):
     depends_on('cmake@2.8.6:', when='@3.4.0:', type='build')
 
     depends_on('mpi', when='+mpi')
-    
+
     @property
     def libs(self):
         # TODO: do we need spec['arpack-ng:parallel'].libs ?
@@ -95,16 +95,8 @@ class ArpackNg(Package):
     def setup_build_environment(self, env):
         # version up to and including 3.7.0 are not ported to gcc 10
         # https://github.com/opencollab/arpack-ng/issues/242
-        env.set('FFLAGS', '-fallow-argument-mismatch')       
-        
-    @when('%apple-clang')
-    def setup_build_environment(self, env):
-        # Kluge to get the gfortran linker to work correctly on Big
-        # Sur, at least until a gcc release > 10.2 is out with a fix.
-        # (There is a fix in their development tree.)
-        if platform.mac_ver()[0][0:2] == '11':
-            env.set('MACOSX_DEPLOYMENT_TARGET', '10.15')
-        
+        env.set('FFLAGS', '-fallow-argument-mismatch')
+
     @when('@3.4.0:')
     def install(self, spec, prefix):
 
