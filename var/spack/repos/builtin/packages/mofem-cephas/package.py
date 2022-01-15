@@ -72,8 +72,8 @@ class MofemCephas(CMakePackage):
     depends_on('slepc@:3.14.99', when='@develop +slepc')
     depends_on('petsc@:3.14.99+mumps+mpi', when='@develop')
     depends_on('slepc@:3.14.99', when='@develop +slepc')
-    depends_on('petsc@:3.14.99+mumps+mpi', when='@lukasz')
-    depends_on('slepc@:3.14.99', when='@lukasz +slepc')
+    depends_on('petsc@:3.16.99+mumps+mpi', when='@lukasz')
+    depends_on('slepc@:3.16.99', when='@lukasz +slepc')
   
     # MOAB install
     depends_on('moab@:5.1.0', when='@0.8.7:0.9.1')
