@@ -78,6 +78,9 @@ class MofemUsersModules(CMakePackage):
     depends_on('mofem-cephas@lukasz', when='@lukasz')
     depends_on('mofem-cephas@develop', when='@develop')
     
+    variant('shared', default=False,
+            description='Builds a shared version of the library')
+    
     # Build variants
     variant('basic_fe', default=True, description='Build basic finite elements') 
     variant('basic_tutorials', default=True, description='Build basic tutorials') 
@@ -147,7 +150,9 @@ class MofemUsersModules(CMakePackage):
             'MOFEM_DIR', spec['mofem-cephas'].prefix.users_module))
         options.append(self.define_from_variant(
             'STAND_ALLONE_USERS_MODULES', 'copy_user_modules'))
-
+        options.append(
+            self.define_from_variant('BUILD_SHARED_LIBS', 'shared'))
+        
         options.append(
             from_variant('BUILD_BASIC_FINITE_ELEMENTS', 'basic_fe'))
         options.append(

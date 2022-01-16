@@ -42,6 +42,9 @@ class MofemCephas(CMakePackage):
     version('0.8.9', tag='v0.8.9')
     version('0.8.8', tag='v0.8.8')
     version('0.8.7', tag='v0.8.7')
+    
+    variant('shared', default=False,
+            description='Builds a shared version of the library')
 
     # This option can be only used for development of core lib
     variant('install_id', values=int, default=0,
@@ -58,7 +61,9 @@ class MofemCephas(CMakePackage):
     depends_on('pkgconfig', type='build')
 
     # boost
-    depends_on('boost@:1.69 cxxstd=17')
+    depends_on('boost@:1.69 cxxstd=14', when='@0.8.7:0.12.1')
+    depends_on('boost@:1.69 cxxstd=14', when='@develop')
+    depends_on('boost@:1.77 +shared cxxstd=17', when='@lukasz')
 
     # mpi an other
     depends_on('mpi')
@@ -76,14 +81,14 @@ class MofemCephas(CMakePackage):
     depends_on('slepc@:3.16.99', when='@lukasz +slepc')
   
     # MOAB install
-    depends_on('moab@:5.1.0', when='@0.8.7:0.9.1')
-    depends_on('moab', when='@0.9.2:')
-    depends_on('moab', when='@develop')
-    depends_on('moab', when='@lukasz')
+    depends_on('moab@:5.1.0 +shared', when='@0.8.7:0.9.1')
+    depends_on('moab +shared', when='@0.9.2:')
+    depends_on('moab +shared', when='@develop')
+    depends_on('moab +shared', when='@lukasz')
 
     # Upper bound set to ADOL-C until issues with memory leaks
     # for versions 2.6: fully resolved
-    depends_on('adol-c@2.5.2~examples', when='+adol-c')
+    depends_on('adol-c~examples', when='+adol-c')
     depends_on('tetgen', when='+tetgen')
     depends_on('parmetis')
     depends_on('blas')
@@ -146,6 +151,10 @@ class MofemCephas(CMakePackage):
         # copy users modules, i.e. stand alone vs linked users modules
         options.append(
             self.define_from_variant('STAND_ALLONE_USERS_MODULES', 'copy_user_modules'))
+        
+        options.append(
+            self.define_from_variant('BUILD_SHARED_LIBS', 'shared'))
+        
         return options
 
     def check(self):
