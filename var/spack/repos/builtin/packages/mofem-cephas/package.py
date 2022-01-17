@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 
+from re import A
 from spack import *
 
 
@@ -150,11 +151,17 @@ class MofemCephas(CMakePackage):
 
         # copy users modules, i.e. stand alone vs linked users modules
         options.append(
-            self.define_from_variant('STAND_ALLONE_USERS_MODULES', 'copy_user_modules'))
+            self.define_from_variant(
+                'STAND_ALLONE_USERS_MODULES', 'copy_user_modules'))
         
         options.append(
             self.define_from_variant('BUILD_SHARED_LIBS', 'shared'))
         
+        if spec['boost'].satisfies('+shared'):
+            options.append(self.define('Boost_USE_STATIC_LIBS', False))
+        else:
+            options.append(self.define('Boost_USE_STATIC_LIBS', True))
+            
         return options
 
     def check(self):
