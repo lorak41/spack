@@ -14,6 +14,7 @@ class MofemSoftmech(CMakePackage):
 
     maintainers = ['likask']
 
+    version('lukasz', branch='lukasz/develop')
     version('develop', branch='develop')
     version('0.0.1', tag='v0.0.1')
     version('0.0.2', tag='v0.0.2')

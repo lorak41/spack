@@ -17,6 +17,7 @@ class MofemBoneRemodelling(CMakePackage):
 
     version('develop', branch='develop')
     version('lukasz', branch='lukasz/develop')
+    version('0.13.0', branch='Version0.13.0')
     version('0.12.0', branch='Version0.12.0')
 
     variant('copy_user_modules', default=True,
