@@ -55,7 +55,7 @@ class MofemUsersModules(CMakePackage):
 
 
     extends('mofem-cephas')
-    depends_on('mofem-cephas@0.13.0', when='@0.13.0:')
+    depends_on('mofem-cephas@0.13.0', when='@0.13.0:0.13.99')
     depends_on('mofem-cephas@0.12.1', when='@0.12.2:0.12.3')
     depends_on('mofem-cephas@0.12.0', when='@0.12.1')
     depends_on('mofem-cephas@0.12.0', when='@0.12.0')
