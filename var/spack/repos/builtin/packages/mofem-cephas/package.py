@@ -64,7 +64,7 @@ class MofemCephas(CMakePackage):
     # boost
     depends_on('boost@:1.69 cxxstd=14', when='@0.8.7:0.12.1')
     depends_on('boost@:1.69 cxxstd=14', when='@develop')
-    depends_on('boost@:1.77 cxxstd=17', when='@lukasz')
+    depends_on('boost@:1.77 +shared cxxstd=17', when='@lukasz')
 
     # mpi an other
     depends_on('mpi')
@@ -82,10 +82,10 @@ class MofemCephas(CMakePackage):
     depends_on('slepc@:3.16.99', when='@lukasz +slepc')
   
     # MOAB install
-    depends_on('moab@:5.1.0', when='@0.8.7:0.9.1')
-    depends_on('moab', when='@0.9.2:')
-    depends_on('moab', when='@develop')
-    depends_on('moab', when='@lukasz')
+    depends_on('moab@:5.1.0 +shared', when='@0.8.7:0.9.1')
+    depends_on('moab +shared', when='@0.9.2:')
+    depends_on('moab +shared', when='@develop')
+    depends_on('moab +shared', when='@lukasz')
 
     # Upper bound set to ADOL-C until issues with memory leaks
     # for versions 2.6: fully resolved
