@@ -51,6 +51,8 @@ class MofemUsersModules(CMakePackage):
     variant('copy_user_modules', default=True,
         description='Copy user modules directory instead linking')
     variant('docker', default=False, description='Build in docker volume')
+    variant('mgis', default=False, description='Build with mgis package (MFront)')
+
 
     extends('mofem-cephas')
     depends_on('mofem-cephas@0.13.0', when='@0.13.0:0.13.99')
@@ -80,6 +82,11 @@ class MofemUsersModules(CMakePackage):
     depends_on('mofem-cephas@lukasz', when='@lukasz')
     depends_on('mofem-cephas@develop', when='@develop')
     
+    # MGIS
+    depends_on('mgis~python~fortran', when='+mgis')
+    depends_on('tfel~python~python_bindings~fortran', when='+mgis')
+
+
     variant('shared', default=False,
             description='Builds a shared version of the library')
     
@@ -159,6 +166,9 @@ class MofemUsersModules(CMakePackage):
             from_variant('BUILD_BASIC_FINITE_ELEMENTS', 'basic_fe'))
         options.append(
             from_variant('BUILD_TUTORIALS', 'basic_tutorials'))
+        
+        if '+mgis' in spec:
+            options.append('-DMGIS_DIR:PATH=%s' % spec['mgis'].prefix)
 
         for name, v in spec.variants.items():
             if (name.startswith('build_tut_')):
