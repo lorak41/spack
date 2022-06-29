@@ -3159,6 +3159,15 @@ class Spec(object):
                     raise UnsatisfiableArchitectureSpecError(sarch, oarch)
 
         changed = False
+
+        if not self.name and other.name:
+            self.name = other.name
+            changed = True
+
+        if not self.namespace and other.namespace:
+            self.namespace = other.namespace
+            changed = True
+
         if self.compiler is not None and other.compiler is not None:
             changed |= self.compiler.constrain(other.compiler)
         elif self.compiler is None:
@@ -4259,7 +4268,7 @@ class Spec(object):
 
         out = ""
         for d, dep_spec in self.traverse_edges(
-                order='pre', cover=cover, depth=True, deptypes=deptypes):
+                order='pre', cover=cover, depth=True, deptype=deptypes):
             node = dep_spec.spec
 
             if prefix is not None:

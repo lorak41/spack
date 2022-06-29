@@ -533,7 +533,7 @@ class Stage(object):
         for entry in hidden_entries + entries:
             if os.path.isdir(entry):
                 d = os.path.join(dest, os.path.basename(entry))
-                shutil.copytree(entry, d)
+                shutil.copytree(entry, d, symlinks=True)
             else:
                 shutil.copy2(entry, dest)
 
@@ -694,8 +694,8 @@ class ResourceStage(Stage):
             source_path = os.path.join(self.source_path, key)
 
             if not os.path.exists(destination_path):
-                tty.info('Moving resource stage\n\tsource : '
-                         '{stage}\n\tdestination : {destination}'.format(
+                tty.info('Moving resource stage\n\tsource: '
+                         '{stage}\n\tdestination: {destination}'.format(
                              stage=source_path, destination=destination_path
                          ))
 
