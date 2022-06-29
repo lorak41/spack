@@ -62,8 +62,8 @@ class MofemCephas(CMakePackage):
     depends_on('pkgconfig', type='build')
 
     # boost
-    depends_on('boost@:1.69 cxxstd=14', when='@0.8.7:0.12.1')
-    depends_on('boost@:1.69 cxxstd=14', when='@develop')
+    depends_on('boost@:1.69 +shared cxxstd=14', when='@0.8.7:0.13.0')
+    depends_on('boost@:1.77 +shared cxxstd=17', when='@develop')
     depends_on('boost@:1.77 +shared cxxstd=17', when='@lukasz')
 
     # mpi an other
