@@ -16,6 +16,7 @@ class MofemMultifieldPlasticity(CMakePackage):
     maintainers = ['karol41', 'likask']
 
     version('develop', branch='develop')
+    version('0.13.0', branch='Version0.13.0')
     version('0.12.0', branch='Version0.12.0')
     version('0.1.0', tag='v0.1.0')
 
@@ -64,6 +65,7 @@ class MofemMultifieldPlasticity(CMakePackage):
         # build tests
         options.append('-DMOFEM_UM_BUILD_TESTS={0}'.format(
             'ON' if self.run_tests else 'OFF'))
+        options.append('-DMULTIFIELD_PLASTICITY:PATH=%s' % spec['mofem-multifield-plasticty'].prefix)
 
         return options
 

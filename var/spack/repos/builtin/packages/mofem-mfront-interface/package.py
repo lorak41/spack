@@ -5,35 +5,31 @@
 
 
 from spack import *
-class MofemMortarContact(CMakePackage):
-    """mofem mortar contact"""
+
+
+class MofemMfrontInterface(CMakePackage):
+    """mofem mfront interface module"""
 
     homepage = "http://mofem.eng.gla.ac.uk"
-    git = "https://IgnatiosAthanasiadis@bitbucket.org/mofem/mortar_contact.git"
+    git = "https://karol41@bitbucket.org/karol41/um_mfront_interface.git"
 
-    maintainers = ['likask', 'IgnatiosAthanasiadis']
+    maintainers = ['karol41', 'likask']
 
     version('develop', branch='develop')
-    version('lukasz', branch='lukasz/develop')
+    version('master', branch='master')
     version('0.13.0', branch='Version0.13.0')
-    version('0.12.1', branch='Version0.12.1')
-    version('0.12.0', branch='Version0.12.0')
-    version('0.11.0', branch='Version0.11.0')
-    version('0.10.0', branch='Version0.10.0')
 
-    variant('install_id', values=int, default=0,
-        description='Internal install Id used by Jenkins')
     variant('copy_user_modules', default=True,
         description='Copy user modules directory instead linking')
 
     extends('mofem-cephas')
+    variant('install_id', values=int, default=0,
+        description='Internal install Id used by Jenkins')
+
     depends_on("mofem-users-modules", type=('build', 'link', 'run'))
-    depends_on('mofem-users-modules@0.12.2:0.12.99', when='@0.12.1')
-    depends_on('mofem-users-modules@lukasz', when='@lukasz')
-    depends_on('mofem-users-modules@develop', when='@develop')
- 
-    def setup_build_environment(self, env):
-        env.set('CTEST_OUTPUT_ON_FAILURE', '1')
+    depends_on('mgis~python~fortran')
+    depends_on('tfel~python~python_bindings~fortran')
+
 
     # The CMakeLists.txt installed with mofem - cephas package set cmake
     # environment to install extension from extension repository.It searches
@@ -62,9 +58,10 @@ class MofemMortarContact(CMakePackage):
         # obligatory options
         options.extend([
             '-DWITH_SPACK=YES',
+            '-DWITH_METAIO=1',
+            '-DMPI_RUN_FLAGS=--allow-run-as-root',
             '-DEXTERNAL_MODULES_BUILD=YES',
             '-DUM_INSTALL_PREFIX=%s' % spec['mofem-users-modules'].prefix,
-            # BREFIX is a spelling bug added here for back compatibility
             '-DUM_INSTALL_BREFIX=%s' % spec['mofem-users-modules'].prefix,
             '-DEXTERNAL_MODULE_SOURCE_DIRS=%s' % source,
             '-DSTAND_ALLONE_USERS_MODULES=%s' %
@@ -73,7 +70,11 @@ class MofemMortarContact(CMakePackage):
         # build tests
         options.append('-DMOFEM_UM_BUILD_TESTS={0}'.format(
             'ON' if self.run_tests else 'OFF'))
-        options.append('-DMORTAR_CONTACT_DIR:PATH=%s' % spec['mofem-mortar-contact'].prefix)
+        
+        options.append('-DMFRONT_INTERFACE_DIR:PATH=%s' % spec['mofem-mfront-interface'].prefix)
+
+        if '+mgis' in spec:
+            options.append('-DMGIS_DIR:PATH=%s' % spec['mgis'].prefix)
 
         return options
 
@@ -86,11 +87,5 @@ class MofemMortarContact(CMakePackage):
     def copy_source_code(self):
         source = self.stage.source_path
         prefix = self.prefix
-        install_tree(source, prefix.ext_users_modules.mortar_contact)
+        install_tree(source, prefix.ext_users_modules.mfront_interface)
 
-    def check(self):
-        """Searches the CMake-generated Makefile for the target ``test``
-        and runs it if found.
-        """
-        with working_dir(self.build_directory):
-            ctest(parallel=False)
