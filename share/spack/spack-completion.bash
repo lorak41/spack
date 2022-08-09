@@ -123,7 +123,7 @@ _bash_completion_spack() {
     # If the cursor is in the middle of the line, like:
     #     `spack -d [] install`
     # COMP_WORDS will not contain the empty character, so we have to add it.
-    if [[ "${COMP_LINE:$COMP_POINT:1}" == " " ]]
+    if [[ "${COMP_LINE:$COMP_POINT-1:1}" == " " ]]
     then
         cur=""
     fi
@@ -208,10 +208,10 @@ _repos() {
     SPACK_COMPREPLY="$SPACK_REPOS"
 }
 
-_tests() {
+_unit_tests() {
     if [[ -z "${SPACK_TESTS:-}" ]]
     then
-        SPACK_TESTS="$(spack test -l)"
+        SPACK_TESTS="$(spack unit-test -l)"
     fi
     SPACK_COMPREPLY="$SPACK_TESTS"
 }
@@ -1780,7 +1780,7 @@ _spack_unit_test() {
     then
         SPACK_COMPREPLY="-h --help -H --pytest-help -l --list -L --list-long -N --list-names --extension -s -k --showlocals"
     else
-        _tests
+        _unit_tests
     fi
 }
 

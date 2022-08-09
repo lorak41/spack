@@ -374,6 +374,21 @@ class PackageMeta(
         return '%s.%s' % (self.namespace, self.name)
 
     @property
+    def fullnames(self):
+        """
+        Fullnames for this package and any packages from which it inherits.
+        """
+        fullnames = []
+        for cls in inspect.getmro(self):
+            namespace = getattr(cls, 'namespace', None)
+            if namespace:
+                fullnames.append('%s.%s' % (namespace, self.name))
+            if namespace == 'builtin':
+                # builtin packages cannot inherit from other repos
+                break
+        return fullnames
+
+    @property
     def name(self):
         """The name of this package.
 
@@ -450,7 +465,7 @@ class PackageViewMixin(object):
         Alternative implementations may allow some of the files to exist in
         the view (in this case they would be omitted from the results).
         """
-        return set(dst for dst in merge_map.values() if os.path.exists(dst))
+        return set(dst for dst in merge_map.values() if os.path.lexists(dst))
 
     def add_files_to_view(self, view, merge_map):
         """Given a map of package files to destination paths in the view, add
@@ -459,7 +474,7 @@ class PackageViewMixin(object):
         linked into the view already include the file.
         """
         for src, dst in merge_map.items():
-            if not os.path.exists(dst):
+            if not os.path.lexists(dst):
                 view.link(src, dst, spec=self.spec)
 
     def remove_files_from_view(self, view, merge_map):
@@ -864,6 +879,10 @@ class PackageBase(six.with_metaclass(PackageMeta, PackageViewMixin, object)):
         return type(self).fullname
 
     @property
+    def fullnames(self):
+        return type(self).fullnames
+
+    @property
     def name(self):
         """Name of this package (the module without parent modules)."""
         return type(self).name
@@ -1182,7 +1201,7 @@ class PackageBase(six.with_metaclass(PackageMeta, PackageViewMixin, object)):
         name = next(iter(self.extendees))
 
         # If the extendee is in the spec's deps already, return that.
-        for dep in self.spec.traverse(deptypes=('link', 'run')):
+        for dep in self.spec.traverse(deptype=('link', 'run')):
             if name == dep.name:
                 return dep
 

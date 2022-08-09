@@ -111,13 +111,17 @@ class MofemUsersModules(CMakePackage):
     variant('build_tut_scl8', default=True, description='Build tutorial')
     variant('build_tut_scl9', default=True, description='Build tutorial')
     variant('build_tut_scl10', default=True, description='Build tutorial')
+    variant('build_tut_scl11', default=True, description='Build tutorial')
     variant('build_tut_clx0', default=True, description='Build tutorial')
     variant('build_tut_vec0', default=True, description='Build tutorial')
     variant('build_tut_vec1', default=True, description='Build tutorial')
     variant('build_tut_vec2', default=True, description='Build tutorial')
     variant('build_tut_vec3', default=True, description='Build tutorial')
     variant('build_tut_vec4', default=True, description='Build tutorial')
+    variant('build_tut_vec5', default=True, description='Build tutorial')
+    variant('build_tut_vec6', default=True, description='Build tutorial')
     variant('build_tut_mix0', default=True, description='Build tutorial')
+    variant('build_tut_mix1', default=True, description='Build tutorial')
     variant('build_tut_max0', default=True, description='Build tutorial')
     variant('build_tut_max1', default=True, description='Build tutorial')
     variant('build_tut_adv0', default=True, description='Build tutorial')
@@ -175,8 +179,13 @@ class MofemUsersModules(CMakePackage):
 
         for name, v in spec.variants.items():
             if (name.startswith('build_tut_')):
-                options.append(
-                    from_variant(name.upper(), name))
+                if '+basic_tutorials' in spec:
+                    options.append(
+                        from_variant(name.upper(), name))
+                else:
+                    options.append(
+                        from_variant(name.upper(), 'basic_tutorials'))
+                
 
         return options
 

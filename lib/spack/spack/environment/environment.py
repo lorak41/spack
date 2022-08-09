@@ -144,10 +144,12 @@ def activate(env, use_env_repo=False):
 
     # Check if we need to reinitialize the store due to pushing the configuration
     # below.
-    store_before_pushing = spack.config.get('config:install_tree')
+    install_tree_before = spack.config.get('config:install_tree')
+    upstreams_before = spack.config.get('upstreams')
     prepare_config_scope(env)
-    store_after_pushing = spack.config.get('config:install_tree')
-    if store_before_pushing != store_after_pushing:
+    install_tree_after = spack.config.get('config:install_tree')
+    upstreams_after = spack.config.get('upstreams')
+    if install_tree_before != install_tree_after or upstreams_before != upstreams_after:
         # Hack to store the state of the store before activation
         env.store_token = spack.store.reinitialize()
 
@@ -489,8 +491,14 @@ class ViewDescriptor(object):
                 raise SpackEnvironmentViewError(msg)
             os.rename(tmp_symlink_name, self.root)
 
-            # remove old_root
-            if old_root and os.path.exists(old_root):
+            # Remove the old root when it's in the same folder as the new root. This
+            # guards against removal of an arbitrary path when the original symlink in
+            # self.root was not created by the environment, but by the user.
+            if (
+                old_root and
+                os.path.exists(old_root) and
+                os.path.samefile(os.path.dirname(new_root), os.path.dirname(old_root))
+            ):
                 try:
                     shutil.rmtree(old_root)
                 except (IOError, OSError) as e:
