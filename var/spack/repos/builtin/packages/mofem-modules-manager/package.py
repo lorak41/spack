@@ -21,8 +21,7 @@ class MofemModulesManager(CMakePackage):
 
     extends('mofem-cephas')
 
-    variant('install_id', values=int, default=0,
-        description='Internal install Id used by Jenkins')
+    variant('install_id', values=int, default=118, description='Internal install Id used by Jenkins')
     variant('copy_user_modules', default=True,
         description='Copy user modules directory instead linking')
     variant('mofem-mortar-contact', default=False, description='Build with MoFEM mortar contact module')
@@ -37,6 +36,7 @@ class MofemModulesManager(CMakePackage):
     depends_on('mofem-mortar-contact', when='+mofem-mortar-contact')
     depends_on('mofem-multifield-plasticty', when='+mofem-multifield-plasticty')
     depends_on('mofem-mfront-interface', when='+mofem-mfront-interface')
+    depends_on('mofem-hdiv-contact', when='+mofem-hdiv-contact')
 
    # MGIS
     depends_on('mgis~python~fortran', when='+mofem-mfront-interface')
@@ -94,5 +94,11 @@ class MofemModulesManager(CMakePackage):
     def copy_source_code(self):
         source = self.stage.source_path
         prefix = self.prefix
-        install_tree(source, prefix.ext_users_modules.modules-manager)
+        install_tree(source, prefix.ext_users_modules.modules_manager)
 
+    def check(self):
+        """Searches the CMake-generated Makefile for the target ``test``
+        and runs it if found.
+        """
+        with working_dir(self.build_directory):
+            ctest(parallel=False)

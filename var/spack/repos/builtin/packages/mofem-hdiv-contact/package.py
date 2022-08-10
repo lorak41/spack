@@ -7,11 +7,11 @@
 from spack import *
 
 
-class MofemMfrontInterface(CMakePackage):
-    """mofem mfront interface module"""
+class MofemHdivContact(CMakePackage):
+    """mofem modules manager module"""
 
     homepage = "http://mofem.eng.gla.ac.uk"
-    git = "https://karol41@bitbucket.org/karol41/um_mfront_interface.git"
+    git = "https://karol41@bitbucket.org/mofem/um_hdiv_contact.git"
 
     maintainers = ['karol41', 'likask']
 
@@ -19,24 +19,17 @@ class MofemMfrontInterface(CMakePackage):
     version('master', branch='master')
     version('0.13.0', branch='Version0.13.0')
 
+    extends('mofem-cephas')
+
+    variant('install_id', values=int, default=112,
+        description='Internal install Id used by Jenkins')
     variant('copy_user_modules', default=True,
         description='Copy user modules directory instead linking')
 
-    extends('mofem-cephas')
-    variant('install_id', values=int, default=119,
-        description='Internal install Id used by Jenkins')
-
     depends_on("mofem-users-modules", type=('build', 'link', 'run'))
-    depends_on('mgis~python~fortran')
-    depends_on('tfel~python~python_bindings~fortran')
+    depends_on('mofem-users-modules@develop', when='@develop')
 
 
-    # The CMakeLists.txt installed with mofem - cephas package set cmake
-    # environment to install extension from extension repository.It searches
-    # for modules in user provides paths, for example in Spack source path.Also
-    # it finds all cmake exported targets installed in lib directory, which are
-    # built with dependent extensions, f.e.mofem - users - modules or others if
-    # needed.
     @property
     def root_cmakelists_dir(self):
         """The relative path to the directory containing CMakeLists.txt
@@ -58,7 +51,6 @@ class MofemMfrontInterface(CMakePackage):
         # obligatory options
         options.extend([
             '-DWITH_SPACK=YES',
-            '-DWITH_METAIO=1',
             '-DMPI_RUN_FLAGS=--allow-run-as-root',
             '-DEXTERNAL_MODULES_BUILD=YES',
             '-DUM_INSTALL_PREFIX=%s' % spec['mofem-users-modules'].prefix,
@@ -70,11 +62,8 @@ class MofemMfrontInterface(CMakePackage):
         # build tests
         options.append('-DMOFEM_UM_BUILD_TESTS={0}'.format(
             'ON' if self.run_tests else 'OFF'))
-        
-        options.append('-DMFRONT_INTERFACE_DIR:PATH=%s' % spec['mofem-mfront-interface'].prefix)
-
-        if '+mgis' in spec:
-            options.append('-DMGIS_DIR:PATH=%s' % spec['mgis'].prefix)
+            
+        options.append('-DHDIV_CONTACT:PATH=%s' % spec['mofem-hdiv-contact'].prefix)
 
         return options
 
@@ -87,7 +76,7 @@ class MofemMfrontInterface(CMakePackage):
     def copy_source_code(self):
         source = self.stage.source_path
         prefix = self.prefix
-        install_tree(source, prefix.ext_users_modules.mfront_interface)
+        install_tree(source, prefix.ext_users_modules.modules_hdiv)
 
     def check(self):
         """Searches the CMake-generated Makefile for the target ``test``
