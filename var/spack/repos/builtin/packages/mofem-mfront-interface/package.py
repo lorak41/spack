@@ -28,7 +28,7 @@ class MofemMfrontInterface(CMakePackage):
 
     depends_on("mofem-users-modules", type=('build', 'link', 'run'))
     depends_on('mgis~python~fortran')
-    depends_on('tfel~python~python_bindings~fortran')
+    depends_on('mgis@1.1~python~fortran', when='@1.1')
 
 
     # The CMakeLists.txt installed with mofem - cephas package set cmake

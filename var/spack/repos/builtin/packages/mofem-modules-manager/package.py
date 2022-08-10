@@ -25,8 +25,9 @@ class MofemModulesManager(CMakePackage):
     variant('copy_user_modules', default=True,
         description='Copy user modules directory instead linking')
     variant('mofem-mortar-contact', default=False, description='Build with MoFEM mortar contact module')
-    variant('mofem-multifield-plasticty', default=False, description='Build with multifield plasticity')
+    variant('mofem-multifield-plasticity', default=False, description='Build with multifield plasticity')
     variant('mofem-mfront-interface', default=False, description='Build with mgis package (MFront)')
+    variant('mofem-hdiv-contact', default=False, description='Build with hdiv contact module')
 
 
     depends_on("mofem-users-modules", type=('build', 'link', 'run'))
@@ -34,7 +35,7 @@ class MofemModulesManager(CMakePackage):
 
     # the modules
     depends_on('mofem-mortar-contact', when='+mofem-mortar-contact')
-    depends_on('mofem-multifield-plasticty', when='+mofem-multifield-plasticty')
+    depends_on('mofem-multifield-plasticity', when='+mofem-multifield-plasticity')
     depends_on('mofem-mfront-interface', when='+mofem-mfront-interface')
     depends_on('mofem-hdiv-contact', when='+mofem-hdiv-contact')
 
@@ -42,6 +43,7 @@ class MofemModulesManager(CMakePackage):
     depends_on('mgis~python~fortran', when='+mofem-mfront-interface')
     depends_on('tfel~python~python_bindings~fortran', when='+mofem-mfront-interface')
 
+    # depends_on('mgis@1.1~python~fortran', when='+mgis @1.1')
     # The CMakeLists.txt installed with mofem - cephas package set cmake
     # environment to install extension from extension repository.It searches
     # for modules in user provides paths, for example in Spack source path.Also

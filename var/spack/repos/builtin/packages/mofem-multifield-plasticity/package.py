@@ -65,7 +65,7 @@ class MofemMultifieldPlasticity(CMakePackage):
         # build tests
         options.append('-DMOFEM_UM_BUILD_TESTS={0}'.format(
             'ON' if self.run_tests else 'OFF'))
-        options.append('-DMULTIFIELD_PLASTICITY:PATH=%s' % spec['mofem-multifield-plasticty'].prefix)
+        options.append('-DMULTIFIELD_PLASTICITY:PATH=%s' % spec['mofem-multifield-plasticity'].prefix)
 
         return options
 
