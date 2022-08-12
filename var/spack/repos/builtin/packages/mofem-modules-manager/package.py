@@ -11,33 +11,43 @@ class MofemModulesManager(CMakePackage):
     """mofem modules manager module"""
 
     homepage = "http://mofem.eng.gla.ac.uk"
-    git = "https://karol41@bitbucket.org/mofem/mofem_modules-manager.git"
+    git = "https://karol41@bitbucket.org/mofem/mofem_modules_manager.git"
 
     maintainers = ['karol41', 'likask']
 
     version('develop', branch='develop')
+    version('karol', branch='develop')
     version('master', branch='master')
+    version('lukasz', branch='lukasz/develop')
     version('0.13.0', branch='Version0.13.0')
 
     extends('mofem-cephas')
 
     variant('install_id', values=int, default=118, description='Internal install Id used by Jenkins')
-    variant('copy_user_modules', default=True,
-        description='Copy user modules directory instead linking')
+    variant('copy_user_modules', default=True, description='Copy user modules directory instead linking')
     variant('mofem-mortar-contact', default=False, description='Build with MoFEM mortar contact module')
     variant('mofem-multifield-plasticity', default=False, description='Build with multifield plasticity')
     variant('mofem-mfront-interface', default=False, description='Build with mgis package (MFront)')
     variant('mofem-hdiv-contact', default=False, description='Build with hdiv contact module')
 
-
-    depends_on("mofem-users-modules", type=('build', 'link', 'run'))
+    depends_on("mofem-users-modules")
+    depends_on('mofem-users-modules@lukasz', when='@lukasz')
     depends_on('mofem-users-modules@develop', when='@develop')
+    depends_on('mofem-users-modules@karol', when='@karol')
 
     # the modules
     depends_on('mofem-mortar-contact', when='+mofem-mortar-contact')
     depends_on('mofem-multifield-plasticity', when='+mofem-multifield-plasticity')
     depends_on('mofem-mfront-interface', when='+mofem-mfront-interface')
     depends_on('mofem-hdiv-contact', when='+mofem-hdiv-contact')
+
+    # develop
+    depends_on('mofem-mortar-contact@karol', when='@karol +mofem-mortar-contact')
+    depends_on('mofem-mortar-contact@develop', when='@develop +mofem-mortar-contact')
+    depends_on('mofem-multifield-plasticity@develop', when='@develop +mofem-multifield-plasticity')
+    depends_on('mofem-mfront-interface@develop', when='@develop +mofem-mfront-interface')
+    depends_on('mofem-hdiv-contact@develop', when='@develop +mofem-hdiv-contact')
+    depends_on('mofem-hdiv-contact@karol', when='@karol +mofem-hdiv-contact')
 
    # MGIS
     depends_on('mgis~python~fortran', when='+mofem-mfront-interface')

@@ -24,7 +24,9 @@ class MofemMultifieldPlasticity(CMakePackage):
         description='Copy user modules directory instead linking')
 
     extends('mofem-cephas')
-    depends_on("mofem-users-modules", type=('build', 'link', 'run'))
+    depends_on("mofem-users-modules")
+    depends_on("mofem-users-modules@develop", when='@develop')
+
 
     # The CMakeLists.txt installed with mofem - cephas package set cmake
     # environment to install extension from extension repository.It searches

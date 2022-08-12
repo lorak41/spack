@@ -16,9 +16,9 @@ class MofemHdivContact(CMakePackage):
     maintainers = ['karol41', 'likask']
 
     version('develop', branch='develop')
+    version('karol', branch='develop')
     version('master', branch='master')
     version('0.13.0', branch='Version0.13.0')
-
     extends('mofem-cephas')
 
     variant('install_id', values=int, default=112,
@@ -26,9 +26,9 @@ class MofemHdivContact(CMakePackage):
     variant('copy_user_modules', default=True,
         description='Copy user modules directory instead linking')
 
-    depends_on("mofem-users-modules", type=('build', 'link', 'run'))
-    depends_on('mofem-users-modules@develop', when='@develop')
-
+    depends_on("mofem-users-modules")
+    depends_on("mofem-users-modules@karol", when='@karol')
+    depends_on("mofem-users-modules@develop", when='@develop')
 
     @property
     def root_cmakelists_dir(self):

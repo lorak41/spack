@@ -18,18 +18,18 @@ class MofemMfrontInterface(CMakePackage):
     version('develop', branch='develop')
     version('master', branch='master')
     version('0.13.0', branch='Version0.13.0')
+    extends('mofem-cephas')
 
+    variant('install_id', values=int, default=119,
+        description='Internal install Id used by Jenkins')
     variant('copy_user_modules', default=True,
         description='Copy user modules directory instead linking')
 
-    extends('mofem-cephas')
-    variant('install_id', values=int, default=119,
-        description='Internal install Id used by Jenkins')
+    depends_on("mofem-users-modules+mgis")
+    depends_on("mofem-users-modules@develop+mgis", when='@develop')
 
-    depends_on("mofem-users-modules", type=('build', 'link', 'run'))
     depends_on('mgis~python~fortran')
-    depends_on('mgis@1.1~python~fortran', when='@1.1')
-
+    depends_on('mgis@1.1~python~fortran', when='@develop')
 
     # The CMakeLists.txt installed with mofem - cephas package set cmake
     # environment to install extension from extension repository.It searches
@@ -72,9 +72,7 @@ class MofemMfrontInterface(CMakePackage):
             'ON' if self.run_tests else 'OFF'))
         
         options.append('-DMFRONT_INTERFACE_DIR:PATH=%s' % spec['mofem-mfront-interface'].prefix)
-
-        if '+mgis' in spec:
-            options.append('-DMGIS_DIR:PATH=%s' % spec['mgis'].prefix)
+        options.append('-DMGIS_DIR:PATH=%s' % spec['mgis'].prefix)
 
         return options
 

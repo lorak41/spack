@@ -18,6 +18,7 @@ class MofemUsersModules(CMakePackage):
 
     version('develop', branch='develop')
     version('lukasz', branch='lukasz/develop')
+    version('karol', branch='karol/develop')
     version('0.13.0', branch='Version0.13.0')
     version('0.12.3', branch='Version0.12.3')
     version('0.12.2', branch='Version0.12.2')
@@ -81,6 +82,7 @@ class MofemUsersModules(CMakePackage):
     depends_on('mofem-cephas@0.8.7', when='@0.8.7')
     depends_on('mofem-cephas@lukasz', when='@lukasz')
     depends_on('mofem-cephas@develop', when='@develop')
+    depends_on('mofem-cephas@develop', when='@karol')
     
     # MGIS
     depends_on('mgis~python~fortran', when='+mgis')

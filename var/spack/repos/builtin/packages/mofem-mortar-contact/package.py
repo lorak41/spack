@@ -15,6 +15,7 @@ class MofemMortarContact(CMakePackage):
 
     version('develop', branch='develop')
     version('lukasz', branch='lukasz/develop')
+    version('karol', branch='karol/develop')
     version('0.13.0', branch='Version0.13.0')
     version('0.12.1', branch='Version0.12.1')
     version('0.12.0', branch='Version0.12.0')
@@ -30,6 +31,7 @@ class MofemMortarContact(CMakePackage):
     depends_on("mofem-users-modules", type=('build', 'link', 'run'))
     depends_on('mofem-users-modules@0.12.2:0.12.99', when='@0.12.1')
     depends_on('mofem-users-modules@lukasz', when='@lukasz')
+    depends_on('mofem-users-modules@karol', when='@karol')
     depends_on('mofem-users-modules@develop', when='@develop')
  
     def setup_build_environment(self, env):
