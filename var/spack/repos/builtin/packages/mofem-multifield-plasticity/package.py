@@ -16,6 +16,7 @@ class MofemMultifieldPlasticity(CMakePackage):
     maintainers = ['karol41', 'likask']
 
     version('develop', branch='develop')
+    version('karol', branch='develop')
     version('0.13.0', branch='Version0.13.0')
     version('0.12.0', branch='Version0.12.0')
     version('0.1.0', tag='v0.1.0')
@@ -26,6 +27,7 @@ class MofemMultifieldPlasticity(CMakePackage):
     extends('mofem-cephas')
     depends_on("mofem-users-modules")
     depends_on("mofem-users-modules@develop", when='@develop')
+    depends_on("mofem-users-modules@karol", when='@karol')
 
 
     # The CMakeLists.txt installed with mofem - cephas package set cmake

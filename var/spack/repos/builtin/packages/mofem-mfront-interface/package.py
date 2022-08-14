@@ -16,6 +16,7 @@ class MofemMfrontInterface(CMakePackage):
     maintainers = ['karol41', 'likask']
 
     version('develop', branch='develop')
+    version('karol', branch='develop')
     version('master', branch='master')
     version('0.13.0', branch='Version0.13.0')
     extends('mofem-cephas')
@@ -27,9 +28,11 @@ class MofemMfrontInterface(CMakePackage):
 
     depends_on("mofem-users-modules+mgis")
     depends_on("mofem-users-modules@develop+mgis", when='@develop')
+    depends_on("mofem-users-modules@karol+mgis", when='@karol')
 
     depends_on('mgis~python~fortran')
     depends_on('mgis@1.1~python~fortran', when='@develop')
+    depends_on('mgis@1.1~python~fortran', when='@karol')
 
     # The CMakeLists.txt installed with mofem - cephas package set cmake
     # environment to install extension from extension repository.It searches
