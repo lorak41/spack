@@ -7,35 +7,29 @@
 from spack import *
 
 
-class MofemMultifieldPlasticity(CMakePackage):
-    """mofem multifield module"""
+class MofemHdivContact(CMakePackage):
+    """mofem modules manager module"""
 
     homepage = "http://mofem.eng.gla.ac.uk"
-    git = "https://karol41@bitbucket.org/karol41/um_multifield_plasticity.git"
+    git = "https://karol41@bitbucket.org/mofem/um_hdiv_contact.git"
 
     maintainers = ['karol41', 'likask']
 
     version('develop', branch='develop')
     version('karol', branch='develop')
+    version('master', branch='master')
     version('0.13.0', branch='Version0.13.0')
-    version('0.12.0', branch='Version0.12.0')
-    version('0.1.0', tag='v0.1.0')
+    extends('mofem-cephas')
 
+    variant('install_id', values=int, default=112,
+        description='Internal install Id used by Jenkins')
     variant('copy_user_modules', default=True,
         description='Copy user modules directory instead linking')
 
-    extends('mofem-cephas')
     depends_on("mofem-users-modules")
-    depends_on("mofem-users-modules@develop", when='@develop')
     depends_on("mofem-users-modules@karol", when='@karol')
+    depends_on("mofem-users-modules@develop", when='@develop')
 
-
-    # The CMakeLists.txt installed with mofem - cephas package set cmake
-    # environment to install extension from extension repository.It searches
-    # for modules in user provides paths, for example in Spack source path.Also
-    # it finds all cmake exported targets installed in lib directory, which are
-    # built with dependent extensions, f.e.mofem - users - modules or others if
-    # needed.
     @property
     def root_cmakelists_dir(self):
         """The relative path to the directory containing CMakeLists.txt
@@ -57,10 +51,9 @@ class MofemMultifieldPlasticity(CMakePackage):
         # obligatory options
         options.extend([
             '-DWITH_SPACK=YES',
-            '-DEXTERNAL_MODULES_BUILD=YES',
             '-DMPI_RUN_FLAGS=--allow-run-as-root',
+            '-DEXTERNAL_MODULES_BUILD=YES',
             '-DUM_INSTALL_PREFIX=%s' % spec['mofem-users-modules'].prefix,
-            # BREFIX is a spelling bug added here for back compatibility
             '-DUM_INSTALL_BREFIX=%s' % spec['mofem-users-modules'].prefix,
             '-DEXTERNAL_MODULE_SOURCE_DIRS=%s' % source,
             '-DSTAND_ALLONE_USERS_MODULES=%s' %
@@ -69,7 +62,8 @@ class MofemMultifieldPlasticity(CMakePackage):
         # build tests
         options.append('-DMOFEM_UM_BUILD_TESTS={0}'.format(
             'ON' if self.run_tests else 'OFF'))
-        options.append('-DMULTIFIELD_PLASTICITY:PATH=%s' % spec['mofem-multifield-plasticity'].prefix)
+            
+        options.append('-DHDIV_CONTACT:PATH=%s' % spec['mofem-hdiv-contact'].prefix)
 
         return options
 
@@ -82,8 +76,8 @@ class MofemMultifieldPlasticity(CMakePackage):
     def copy_source_code(self):
         source = self.stage.source_path
         prefix = self.prefix
-        install_tree(source, prefix.ext_users_modules.multifield)
-    
+        install_tree(source, prefix.ext_users_modules.modules_hdiv)
+
     def check(self):
         """Searches the CMake-generated Makefile for the target ``test``
         and runs it if found.

@@ -18,6 +18,7 @@ class MofemUsersModules(CMakePackage):
 
     version('develop', branch='develop')
     version('lukasz', branch='lukasz/develop')
+    version('karol', branch='karol/develop')
     version('0.13.0', branch='Version0.13.0')
     version('0.12.3', branch='Version0.12.3')
     version('0.12.2', branch='Version0.12.2')
@@ -53,7 +54,6 @@ class MofemUsersModules(CMakePackage):
     variant('docker', default=False, description='Build in docker volume')
     variant('mgis', default=False, description='Build with mgis package (MFront)')
 
-
     extends('mofem-cephas')
     depends_on('mofem-cephas@0.13.0', when='@0.13.0:0.13.99')
     depends_on('mofem-cephas@0.12.1', when='@0.12.2:0.12.3')
@@ -81,11 +81,11 @@ class MofemUsersModules(CMakePackage):
     depends_on('mofem-cephas@0.8.7', when='@0.8.7')
     depends_on('mofem-cephas@lukasz', when='@lukasz')
     depends_on('mofem-cephas@develop', when='@develop')
+    depends_on('mofem-cephas@develop', when='@karol')
     
     # MGIS
     depends_on('mgis~python~fortran', when='+mgis')
     depends_on('tfel~python~python_bindings~fortran', when='+mgis')
-
 
     variant('shared', default=False,
             description='Builds a shared version of the library')
