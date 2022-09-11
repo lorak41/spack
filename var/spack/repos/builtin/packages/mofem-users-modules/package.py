@@ -173,6 +173,7 @@ class MofemUsersModules(CMakePackage):
         
         if '+mgis' in spec:
             options.append('-DMGIS_DIR:PATH=%s' % spec['mgis'].prefix)
+            options.append('-DTFEL_DIR:PATH=%s' % spec['tfel'].prefix)
 
         for name, v in spec.variants.items():
             if (name.startswith('build_tut_')):
