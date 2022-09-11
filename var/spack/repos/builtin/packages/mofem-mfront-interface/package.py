@@ -76,6 +76,7 @@ class MofemMfrontInterface(CMakePackage):
         
         options.append('-DMFRONT_INTERFACE_DIR:PATH=%s' % spec['mofem-mfront-interface'].prefix)
         options.append('-DMGIS_DIR:PATH=%s' % spec['mgis'].prefix)
+        options.append('-DTFEL_DIR:PATH=%s' % spec['tfel'].prefix)
 
         return options
 
