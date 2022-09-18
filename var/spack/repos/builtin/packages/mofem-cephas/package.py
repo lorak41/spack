@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 
+import string
 from spack import *
 
 
@@ -17,6 +18,7 @@ class MofemCephas(CMakePackage):
 
     version('develop', branch='develop')
     version('lukasz', branch='lukasz/develop')
+    version('0.13.2', branch='Version0.13.2')
     version('0.13.0', branch='Version0.13.0')
     version('0.12.1', branch='Version0.12.1')
     version('0.12.0', branch='Version0.12.0')
@@ -48,8 +50,8 @@ class MofemCephas(CMakePackage):
             description='Builds a shared version of the library')
 
     # This option can be only used for development of core lib
-    variant('install_id', values=int, default=0,
-        description='Internal install Id used by Jenkins')
+    variant('install_id', default="0",
+            description='Internal install ID used by Jenkins')
     variant('copy_user_modules', default=True,
         description='Copy user modules directory instead linking to source')
     variant('adol-c', default=True, description='Compile with ADOL-C')
@@ -62,7 +64,8 @@ class MofemCephas(CMakePackage):
     depends_on('pkgconfig', type='build')
 
     # boost
-    depends_on('boost@:1.69 +shared cxxstd=14', when='@0.8.7:0.13.0')
+    depends_on('boost@:1.69 +shared cxxstd=14', when='@:0.13.0')
+    depends_on('boost@:1.77 +shared cxxstd=17', when='@0.13.0:')
     depends_on('boost@:1.77 +shared cxxstd=17', when='@develop')
     depends_on('boost@:1.77 +shared cxxstd=17', when='@lukasz')
 
@@ -72,8 +75,10 @@ class MofemCephas(CMakePackage):
     # PETSC install
     depends_on('petsc@:3.11.99+mumps+mpi', when='@0.8.7:0.10.0')
     depends_on('slepc@:3.11.99', when='@0.8.7:0.10.0 +slepc')
-    depends_on('petsc@:3.14.99+mumps+mpi', when='@0.11.0:')
+    depends_on('petsc@:3.14.99+mumps+mpi', when='@0.11.0:0.13.0')
     depends_on('slepc@:3.14.99', when='@0.11.0: +slepc')
+    depends_on('petsc@:3.16.99+mumps+mpi', when='@0.13.1:')
+    depends_on('slepc@:3.16.99', when='@0.11.0: +slepc')
     depends_on('petsc@:3.16.99+mumps+mpi', when='@develop')
     depends_on('slepc@:3.16.99', when='@develop +slepc')
     depends_on('petsc@:3.16.99+mumps+mpi', when='@lukasz')

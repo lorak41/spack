@@ -19,6 +19,7 @@ class MofemUsersModules(CMakePackage):
     version('develop', branch='develop')
     version('lukasz', branch='lukasz/develop')
     version('karol', branch='karol/develop')
+    version('0.13.2', branch='Version0.13.2')
     version('0.13.0', branch='Version0.13.0')
     version('0.12.3', branch='Version0.12.3')
     version('0.12.2', branch='Version0.12.2')
@@ -47,15 +48,16 @@ class MofemUsersModules(CMakePackage):
 
     maintainers = ['likask']
 
-    variant('install_id', default=0,
-        description='Internal install Id used by Jenkins')
+    variant('install_id', default="0",
+        description='Internal install ID used by Jenkins')
     variant('copy_user_modules', default=True,
         description='Copy user modules directory instead linking')
     variant('docker', default=False, description='Build in docker volume')
     variant('mgis', default=False, description='Build with mgis package (MFront)')
 
     extends('mofem-cephas')
-    depends_on('mofem-cephas@0.13.0', when='@0.13.0:0.13.99')
+    depends_on('mofem-cephas@0.13.2', when='@0.13.2:0.13.99')
+    depends_on('mofem-cephas@0.13.0', when='@0.13.0:0.13.1')
     depends_on('mofem-cephas@0.12.1', when='@0.12.2:0.12.3')
     depends_on('mofem-cephas@0.12.0', when='@0.12.1')
     depends_on('mofem-cephas@0.12.0', when='@0.12.0')
