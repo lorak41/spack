@@ -1,4 +1,4 @@
-# Copyright 2013-2021 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2022 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
@@ -432,7 +432,7 @@ def test_remove_list(mutable_empty_config):
 
 
 def test_config_add_to_env(mutable_empty_config, mutable_mock_env_path):
-    ev.create('test')
+    env('create', 'test')
     with ev.read('test'):
         config('add', 'config:dirty:true')
         output = config('get')
@@ -486,7 +486,7 @@ def test_config_remove_from_env(mutable_empty_config, mutable_mock_env_path):
         config('rm', 'config:dirty')
         output = config('get')
 
-    expected = ev.default_manifest_yaml
+    expected = ev.default_manifest_yaml()
     expected += """  config: {}
 
 """
