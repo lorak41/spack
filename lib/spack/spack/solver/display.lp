@@ -12,6 +12,7 @@
 % Spec-related functions.
 % Used to build the result of the solve.
 #show node/1.
+#show node_namespace/2.
 #show hash/2.
 #show depends_on/3.
 #show version/2.
@@ -23,9 +24,10 @@
 #show node_compiler_version/3.
 #show node_flag/3.
 #show node_flag_compiler_default/1.
-#show node_flag_source/2.
+#show node_flag_source/3.
 #show no_flags/2.
 #show external_spec_selected/2.
+#show version_equivalent/3.
 
 #show build/1.
 

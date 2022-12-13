@@ -4,8 +4,7 @@
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 
-import string
-from spack import *
+from spack.package import *
 from spack.pkg.builtin.boost import Boost
 
 
@@ -112,7 +111,7 @@ class MofemCephas(CMakePackage):
 
     extendable = True
 
-    root_cmakelists_dir = 'mofem'
+    root_cmakelists_dir = "mofem"
 
     def setup_build_environment(self, env):
         env.set('CTEST_OUTPUT_ON_FAILURE', '1')
@@ -143,7 +142,7 @@ class MofemCephas(CMakePackage):
             '-DBLAS_DIR:PATH=%s' % spec['blas'].prefix])
 
         # build tests
-        options.append(self.define('MOFEM_BUILD_TESTS', self.run_tests))
+        options.append(self.define("MOFEM_BUILD_TESTS", self.run_tests))
 
         # variant packages
         if '+adol-c' in spec:
