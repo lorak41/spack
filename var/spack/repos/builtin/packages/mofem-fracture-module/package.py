@@ -44,8 +44,8 @@ class MofemFractureModule(CMakePackage):
         description='Copy user modules directory instead linking')
 
     extends('mofem-cephas')
-    depends_on('mofem-mortar-contact@0.14.0', when='@0.14.0:')
-    depends_on('mofem-mortar-contact@0.13.0', when='@0.13.0:')
+    depends_on('mofem-mortar-contact@0.14.0:0.14.99', when='@0.14.0:0.14.99')
+    depends_on('mofem-mortar-contact@0.13.0:0.13.99', when='@0.13.0:0.13.99')
     depends_on('mofem-mortar-contact@0.12.1', when='@0.12.3:0.12.99')
     depends_on('mofem-mortar-contact@0.12.0', when='@0.12.2')
     depends_on('mofem-mortar-contact@0.12.0', when='@0.12.1')
@@ -53,8 +53,9 @@ class MofemFractureModule(CMakePackage):
     depends_on('mofem-mortar-contact@0.11.0', when='@0.11.0')
     depends_on('mofem-mortar-contact@lukasz', when='@lukasz')
     depends_on('mofem-mortar-contact@develop', when='@develop')    
-    depends_on('mofem-users-modules@0.14.0', when='@0.14.0:')
-    depends_on('mofem-users-modules@0.13.0', when='@0.13.0:')
+    
+    depends_on('mofem-users-modules@0.14.0:0.14.99', when='@0.14.0:0.14.99')
+    depends_on('mofem-users-modules@0.13.0:0.13.99', when='@0.13.0:0.13.99')
     depends_on('mofem-users-modules@0.12.3', when='@0.12.3:0.12.99')
     depends_on('mofem-users-modules@0.12.1', when='@0.12.2')
     depends_on('mofem-users-modules@0.12.0', when='@0.12.1')
@@ -68,17 +69,9 @@ class MofemFractureModule(CMakePackage):
     depends_on('mofem-users-modules@0.8.17:', when='@0.9.50')
     depends_on('mofem-users-modules@0.8.16', when='@0.9.49')
     depends_on('mofem-users-modules@0.8.15', when='@0.9.48')
-    depends_on('mofem-mortar-contact@develop', when='develop')
-    depends_on('mofem-mortar-contact@develop', when='lukasz')
     depends_on('mofem-users-modules@develop', when='@develop')
     depends_on('mofem-users-modules@lukasz', when='@lukasz')
-    depends_on("mofem-users-modules", type=('build', 'link', 'run'))
-    depends_on("mofem-mortar-contact", 
-      type=('build', 'link', 'run'), when='@0.10.0')
-    depends_on("mofem-mortar-contact", 
-      type=('build', 'link', 'run'), when='@develop')
-    depends_on("mofem-mortar-contact", 
-      type=('build', 'link', 'run'), when='@lukasz')
+    
 
     def setup_build_environment(self, env):
         env.set('CTEST_OUTPUT_ON_FAILURE', '1')
