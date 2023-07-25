@@ -16,6 +16,7 @@ class MofemUsersModules(CMakePackage):
     homepage = "http://mofem.eng.gla.ac.uk"
     git = "https://likask@bitbucket.org/mofem/users-modules-cephas.git"
 
+    version('master', branch='master')
     version('develop', branch='develop')
     version('lukasz', branch='lukasz/develop')
     version('karol', branch='karol/develop')
@@ -85,6 +86,7 @@ class MofemUsersModules(CMakePackage):
     depends_on('mofem-cephas@0.8.7', when='@0.8.7')
     depends_on('mofem-cephas@lukasz', when='@lukasz')
     depends_on('mofem-cephas@develop', when='@develop')
+    depends_on('mofem-cephas@master', when='@master')
     depends_on('mofem-cephas@develop', when='@karol')
     
     # MGIS
