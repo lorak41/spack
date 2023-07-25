@@ -16,6 +16,7 @@ class MofemCephas(CMakePackage):
 
     maintainers = ['likask']
 
+    version('master', branch='master')
     version('develop', branch='develop')
     version('lukasz', branch='lukasz/develop')
     version('0.14.0', branch='Version0.14.0')
@@ -67,6 +68,7 @@ class MofemCephas(CMakePackage):
     # boost
     depends_on('boost@:1.69 +shared cxxstd=14', when='@0.8.7:0.13.0')
     depends_on('boost@:1.77 +shared cxxstd=17', when='@0.13.0:')
+    depends_on('boost@:1.77 +shared cxxstd=17', when='@master')
     depends_on('boost@:1.77 +shared cxxstd=17', when='@develop')
     depends_on('boost@:1.77 +shared cxxstd=17', when='@lukasz')
     
@@ -87,6 +89,8 @@ class MofemCephas(CMakePackage):
     # New
     depends_on('petsc@:3.16.99+mumps+mpi', when='@0.13.0:')
     depends_on('slepc@:3.16.99', when='@0.13.0: +slepc')
+    depends_on('petsc@:3.16.99+mumps+mpi', when='@master')
+    depends_on('slepc@:3.16.99', when='@master +slepc')
     depends_on('petsc@:3.16.99+mumps+mpi', when='@develop')
     depends_on('slepc@:3.16.99', when='@develop +slepc')
     depends_on('petsc@:3.16.99+mumps+mpi', when='@lukasz')
@@ -95,6 +99,7 @@ class MofemCephas(CMakePackage):
     # MOAB install
     depends_on('moab@:5.1.0 +shared', when='@0.8.7:0.9.1')
     depends_on('moab +shared', when='@0.9.2:')
+    depends_on('moab +shared', when='@master')
     depends_on('moab +shared', when='@develop')
     depends_on('moab +shared', when='@lukasz')
 
@@ -109,6 +114,7 @@ class MofemCephas(CMakePackage):
     depends_on('med', when='+med')
     depends_on('med@:3.99.99', when='+med @0.8.7:0.9.0')
     depends_on('med@4.1.0:', when='+med @0.9.1:')
+    depends_on('med@4.1.0:', when='+med @master')
     depends_on('med@4.1.0:', when='+med @develop')
     depends_on('med@4.1.0:', when='+med @lukasz')
 
