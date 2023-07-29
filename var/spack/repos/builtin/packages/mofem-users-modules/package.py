@@ -84,9 +84,9 @@ class MofemUsersModules(CMakePackage):
     depends_on('mofem-cephas@0.8.10', when='@0.8.10')
     depends_on('mofem-cephas@0.8.8:0.8.9', when='@0.8.8')
     depends_on('mofem-cephas@0.8.7', when='@0.8.7')
-    depends_on('mofem-cephas@lukasz', when='@lukasz')
-    depends_on('mofem-cephas@develop', when='@develop')
     depends_on('mofem-cephas@master', when='@master')
+    depends_on('mofem-cephas@develop', when='@develop')
+    depends_on('mofem-cephas@lukasz', when='@lukasz')
     depends_on('mofem-cephas@develop', when='@karol')
     
     # MGIS
