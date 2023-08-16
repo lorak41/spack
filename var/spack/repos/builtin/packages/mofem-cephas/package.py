@@ -87,8 +87,8 @@ class MofemCephas(CMakePackage):
     depends_on('petsc@:3.14.99+mumps+mpi', when='@0.11.0:0.11.99')
     depends_on('slepc@:3.14.99', when='@0.11.0:0.11.99 +slepc')
     # New
-    depends_on('petsc@:3.16.99+mumps+mpi', when='@0.13.0:')
-    depends_on('slepc@:3.16.99', when='@0.13.0: +slepc')
+    depends_on('petsc@:3.16.99+mumps+mpi', when='@0.12.0:')
+    depends_on('slepc@:3.16.99', when='@0.12.0: +slepc')
     depends_on('petsc@:3.16.99+mumps+mpi', when='@master')
     depends_on('slepc@:3.16.99', when='@master +slepc')
     depends_on('petsc@:3.16.99+mumps+mpi', when='@develop')
