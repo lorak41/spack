@@ -101,6 +101,8 @@ class MofemFractureModule(CMakePackage):
         options = [
             self.define('WITH_SPACK', True),
             self.define('EXTERNAL_MODULES_BUILD', True),
+            self.define('UM_INSTALL_PREFIX',
+                        spec['mofem-users-modules'].prefix),
             # BREFIX is a spelling bug added here for back compatibility
             self.define('UM_INSTALL_BREFIX',
                         spec['mofem-users-modules'].prefix),
