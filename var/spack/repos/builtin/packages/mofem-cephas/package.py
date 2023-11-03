@@ -1,11 +1,11 @@
-# Copyright 2013-2021 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2022 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
 
-import string
-from spack import *
+from spack.package import *
+from spack.pkg.builtin.boost import Boost
 
 
 class MofemCephas(CMakePackage):
@@ -71,6 +71,11 @@ class MofemCephas(CMakePackage):
     depends_on('boost@:1.77 +shared cxxstd=17', when='@master')
     depends_on('boost@:1.77 +shared cxxstd=17', when='@develop')
     depends_on('boost@:1.77 +shared cxxstd=17', when='@lukasz')
+    
+    # TODO: replace this with an explicit list of components of Boost,
+    # for instance depends_on('boost +filesystem')
+    # See https://github.com/spack/spack/pull/22303 for reference
+    depends_on(Boost.with_default_variants)
 
     # mpi an other
     depends_on('mpi')
@@ -115,7 +120,7 @@ class MofemCephas(CMakePackage):
 
     extendable = True
 
-    root_cmakelists_dir = 'mofem'
+    root_cmakelists_dir = "mofem"
 
     def setup_build_environment(self, env):
         env.set('CTEST_OUTPUT_ON_FAILURE', '1')
